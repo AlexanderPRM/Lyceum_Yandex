@@ -21,8 +21,8 @@
     для запуска в dev-режиме в переменную DEBUG нужно указать True, иначе False
 - Для того чтобы запустить "_проект_", нужно прописать команду. 
   - Также в терминале внешней папки - "Lyceum_Yandex"
-  Windows:<br>
+  <br>Windows:<br>
     - ```python lyceum_yandex_pj/manage.py runserver```
-  Mac OS и Linux:<br>
+  <br>Mac OS и Linux:<br>
     - ```python3 lyceum_yandex_pj/manage.py runserver```
   
