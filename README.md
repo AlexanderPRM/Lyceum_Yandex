@@ -9,6 +9,6 @@
     -  И пропишите - ```pip install -r requirements.txt```<br>
   - В папке _lyceum_yandex_pj_ есть файл .env.exapmle, уберите расширение .example и запишите ключи в переменную SECRET_KEY и DEBUG,
     для запуска в dev-режиме в переменную DEBUG нужно указать True, иначе False
-- Для того чтобы запустить "_проект_", нужно прописать команду.
+- Для того чтобы запустить "_проект_", нужно прописать команду. 
   - Также в терминале внешней папки - "Lyceum_Yandex"
   - ```python lyceum_yandex_pj/manage.py runserver```
