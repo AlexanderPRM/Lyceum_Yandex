@@ -22,7 +22,7 @@
 - Для того чтобы запустить "_проект_", нужно прописать команду. 
   - Также в терминале внешней папки - "Lyceum_Yandex"
   <br>Windows:<br>
-    - ```python lyceum_yandex_pj/manage.py runserver```
+  ```python lyceum_yandex_pj/manage.py runserver```
   <br>Mac OS и Linux:<br>
-    - ```python3 lyceum_yandex_pj/manage.py runserver```
+  ```python3 lyceum_yandex_pj/manage.py runserver```
   
