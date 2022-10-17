@@ -9,10 +9,10 @@
 
     -  И пропишите:<br>
     Windows:
-      - <br>```python -m venv venv```<br>
+      <br>```python -m venv venv```<br>
         ```venv/Scripts/activate```<br>
     Mac OS и Linux:
-      - <br>```python3 -m venv venv```<br>
+      <br>```python3 -m venv venv```<br>
         ```source venv/bin/activate```
     - Установка зависимостей:
       <br>```pip install -r requirements.txt```<br>
