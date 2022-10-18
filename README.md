@@ -1,7 +1,6 @@
 ![flake8 status](https://github.com/AlexanderPRM/Lyceum_Yandex/actions/workflows/python-package.yml/badge.svg?event=push)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 ![rating](https://img.shields.io/badge/rating-★☆☆☆☆-brightgreen)&nbsp;&nbsp;
-[![telegram-dev](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/permyakov10)
 ###  *Инструкция по развёртыванию проекта*
 
 - Клонируйте репозиторий на компьютер,
