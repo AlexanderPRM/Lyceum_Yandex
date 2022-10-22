@@ -27,4 +27,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python lyceum_yandex_pj/manage.py test lyceum_yandex_pj

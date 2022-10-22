@@ -18,8 +18,7 @@
     - Установка зависимостей:
       <br>```pip install -r requirements.txt```<br>
 - Укажите секретные ключи.
-  - В папке _lyceum_yandex_pj_ есть файл .env.exapmle, уберите расширение .example и запишите ключи в переменную SECRET_KEY и DEBUG,
-    для запуска в dev-режиме в переменную DEBUG нужно указать True, иначе False
+  - В папке _lyceum_yandex_pj_ есть файл .env.exapmle, уберите расширение .example, в SECRET_KEY и DEBUG стоят значения по умолчанию, вы можете поменять.
 - Для того чтобы запустить "_проект_", нужно прописать команду. 
   - Также в терминале внешней папки - "Lyceum_Yandex"
   <br>Windows:<br>
