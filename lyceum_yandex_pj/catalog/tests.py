@@ -24,4 +24,4 @@ class StaticURLTest(TestCase):
 
     def test_negative5_catalog(self):
         response = Client().get('/catalog/0/')
-        self.assertEqual(response.status_code, 404)  
+        self.assertEqual(response.status_code, 404)
