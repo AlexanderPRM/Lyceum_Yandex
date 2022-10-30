@@ -1,3 +1,63 @@
 from django.db import models
+from core.models import BaseCatalog
+from django.core.validators import MinValueValidator, MaxValueValidator
+from catalog.validators import validate_text
 
-# Create your models here.
+
+class Tag(BaseCatalog):
+    slug = models.SlugField(
+                            max_length=200,
+                            unique=True,
+                            verbose_name='Слаг')
+
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
+
+    def __str__(self):
+        return self.name
+
+
+class Category(BaseCatalog):
+    slug = models.SlugField(
+                            max_length=200,
+                            unique=True,
+                            verbose_name='Слаг',
+                            help_text='Используйте только только цифры,'
+                                      ' буквы латиницы и символы - и _')
+    weight = models.SmallIntegerField(
+                                default=100,
+                                validators=[
+                                            MinValueValidator(0),
+                                            MaxValueValidator(32767)
+                                            ],
+                                verbose_name='Вес')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+
+class Item(BaseCatalog):
+    text = models.TextField(
+                        verbose_name='Описание',
+                        validators=[validate_text('превосходно', 'роскошно')])
+    category = models.ForeignKey(
+                            Category,
+                            on_delete=models.CASCADE,
+                            related_name='items',
+                            verbose_name='Категория')
+    tag = models.ManyToManyField(
+                                Tag,
+                                related_name='items',
+                                verbose_name='Теги')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'

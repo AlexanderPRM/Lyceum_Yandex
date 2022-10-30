@@ -4,6 +4,8 @@
 ![rating](https://img.shields.io/badge/rating-★☆☆☆☆-brightgreen)&nbsp;&nbsp;
 ###  *Инструкция по развёртыванию проекта*
 
+![image](models_shema/catalog_category_item.jpg)
+
 - Клонируйте репозиторий на компьютер,
   - Сделать это можно путем введения команды в терминале.
   - ```git clone https://github.com/AlexanderPRM/Lyceum_Yandex.git``` 
