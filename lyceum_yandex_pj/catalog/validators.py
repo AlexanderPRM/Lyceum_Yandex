@@ -22,9 +22,8 @@ def validate_text(*words):
                parse_word.inflect({'acc2'}).word in value,
                parse_word.inflect({'gen2'}).word in value]):
                 return value
-        raise ValidationError(
-                        f'В описании обязательно должно быть - '
-                        f'{" & ".join(words)}')
+        raise ValidationError(f'В описании обязательно должно быть - '
+                              f'{" & ".join(words)}')
     return sub_validator
 
 # На будущее :)

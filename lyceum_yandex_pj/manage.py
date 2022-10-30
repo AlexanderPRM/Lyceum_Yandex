@@ -6,7 +6,8 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lyceum_yandex_pj.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          'lyceum_yandex_pj.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
