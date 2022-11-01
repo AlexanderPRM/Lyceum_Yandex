@@ -1,14 +1,19 @@
 from django.db import models
 from core.models import BaseCatalog
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from catalog.validators import validate_text
 
 
 class Tag(BaseCatalog):
-    slug = models.SlugField(
-                            max_length=200,
+    slug = models.SlugField(max_length=200,
                             unique=True,
-                            verbose_name='Слаг')
+                            verbose_name='Слаг',
+                            help_text='Используйте только цифры, '
+                                      'буквы латиницы и символы - и _',
+                            validators=[
+                                RegexValidator(
+                                    regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$')]
+                            )
 
     class Meta:
         verbose_name = 'Тег'
@@ -19,19 +24,19 @@ class Tag(BaseCatalog):
 
 
 class Category(BaseCatalog):
-    slug = models.SlugField(
-                            max_length=200,
+    slug = models.SlugField(max_length=200,
                             unique=True,
                             verbose_name='Слаг',
-                            help_text='Используйте только только цифры,'
-                                      ' буквы латиницы и символы - и _')
-    weight = models.SmallIntegerField(
-                                default=100,
-                                validators=[
-                                            MinValueValidator(0),
-                                            MaxValueValidator(32767)
-                                            ],
-                                verbose_name='Вес')
+                            help_text='Используйте только цифры, '
+                                      'буквы латиницы и символы - и _',
+                            validators=[
+                                RegexValidator(
+                                    regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$',)])
+    weight = models.SmallIntegerField(default=100,
+                                      validators=[MinValueValidator(0),
+                                                  MaxValueValidator(32767)
+                                                  ],
+                                      verbose_name='Вес')
 
     def __str__(self):
         return self.name
@@ -42,18 +47,16 @@ class Category(BaseCatalog):
 
 
 class Item(BaseCatalog):
-    text = models.TextField(
-                        verbose_name='Описание',
-                        validators=[validate_text('превосходно', 'роскошно')])
-    category = models.ForeignKey(
-                            Category,
-                            on_delete=models.CASCADE,
-                            related_name='items',
-                            verbose_name='Категория')
-    tag = models.ManyToManyField(
-                                Tag,
-                                related_name='items',
-                                verbose_name='Теги')
+    text = models.TextField(verbose_name='Описание',
+                            validators=[
+                                validate_text('превосходно', 'роскошно')])
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='items',
+                                 verbose_name='Категория')
+    tag = models.ManyToManyField(Tag,
+                                 related_name='items',
+                                 verbose_name='Теги')
 
     def __str__(self):
         return self.name
