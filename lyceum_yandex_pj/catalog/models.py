@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import BaseCatalog
-from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import RegexValidator
 from catalog.validators import validate_text
 
 
@@ -64,3 +65,27 @@ class Item(BaseCatalog):
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class PhotoItem(models.Model):
+    image = models.ImageField()
+    item = models.OneToOneField(Item, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.image.url
+
+    class Meta:
+        verbose_name = 'Фото товара'
+        verbose_name_plural = 'Фото товара'
+
+
+class PhotosItem(models.Model):
+    image = models.ImageField()
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.image.url
+
+    class Meta:
+        verbose_name = 'Фото товара'
+        verbose_name_plural = 'Фотогалерея товаров'

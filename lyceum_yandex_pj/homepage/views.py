@@ -1,6 +1,8 @@
-# from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse('Главная <br>страница')
+    context = {}
+    return render(request,
+                  template_name='pages/homepage/main.html',
+                  context=context)
