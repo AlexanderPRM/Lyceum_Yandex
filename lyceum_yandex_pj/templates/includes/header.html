@@ -1,10 +1,42 @@
+{% load static %}
 <header>
-    <div style="text-align:center">
-        {% with request.resolver_match.view_name as view_name %}
-            <a {% if view_name == 'homepage:main' %}class="active"{% endif %} href="{% url 'homepage:main' %}">Главная</a>
-            <a {% if view_name == 'catalog:item_list' %}class="active"{% endif %} href="{% url 'catalog:item_list' %}">Каталог Товаров</a>
-            <a {% if view_name == 'about:main' %}class="active"{% endif %} href="{% url 'about:main' %}">О нас</a>
-        {% endwith %}
-        <hr>
-    </div>
-</header>
+    <nav class="navbar navbar-expand-lg bg-secondary">
+        <div class="container-fluid">
+            <a href="\" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <img src='{% static "img/favicon/favicon.ico" %}'>
+            </a>
+          <div class="collapse navbar-collapse" id="navbarText">
+            {% with request.resolver_match.view_name as view_name %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a {% if view_name == 'homepage:main' %}
+                    class="nav-link active"
+                    {% else %}
+                    class="nav-link"
+                    {% endif %} 
+                    aria-current="page" href="{% url 'homepage:main' %}"">Homepage</a>
+              </li>
+              <li class="nav-item">
+                <a {% if view_name == 'catalog:item_list' %}
+                    class="nav-link active"
+                    {% else %}
+                    class="nav-link"
+                    {% endif %} 
+                    href="{% url 'catalog:item_list' %}">Catalog</a>
+              </li>
+              <li class="nav-item">
+                <a {% if view_name == 'about:main' %} 
+                    class="nav-link active"
+                    {% else %}
+                    class="nav-link"
+                    {% endif %} class="nav-link" href="{% url 'about:main' %}">About</a>
+              </li>
+            </ul>
+            {% endwith %}
+            <span class="navbar-text">
+              Тут будет какая-то инфа
+            </span>
+          </div>
+        </div>
+      </nav>
+ 

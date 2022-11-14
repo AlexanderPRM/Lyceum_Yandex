@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from django_cleanup.signals import cleanup_pre_delete
-from sorl.thumbnail import delete
 from dotenv import load_dotenv
+from sorl.thumbnail import delete
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,8 +30,11 @@ DEBUG = os.environ.get('DEBUG', default='True') == 'True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-
-# Application definition
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'django_summernote',
+    'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -55,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'lyceum_yandex_pj.urls'

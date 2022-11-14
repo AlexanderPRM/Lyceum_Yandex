@@ -1,16 +1,21 @@
+from catalog.models import Category, Item, PhotoItem, PhotosItem, Tag
 from django.contrib import admin
-from catalog.models import Item, Category, Tag, PhotoItem, PhotosItem
-from sorl.thumbnail import get_thumbnail
 from django.utils.safestring import mark_safe
 from django_summernote.admin import SummernoteModelAdmin
+from sorl.thumbnail import get_thumbnail
+
+
+class PhotoItemInline(admin.TabularInline):
+    model = PhotoItem
 
 
 class ItemAdmin(SummernoteModelAdmin):
-    list_display = ('name', 'is_published', 'img_thumb')
+    list_display = ('id', 'name', 'is_published', 'img_thumb')
     list_editable = ('is_published',)
     list_display_links = ('name',)
     filter_horizontal = ('tag',)
     summernote_fields = ('text',)
+    inlines = (PhotoItemInline,)
 
     def get_img(self, obj):
         print(self)
@@ -43,12 +48,6 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_published')
     list_editable = ('is_published',)
     list_display_links = ('name',)
-
-
-@admin.register(PhotoItem)
-class PhotoItemAdmin(admin.ModelAdmin):
-    list_display = ('item', 'image')
-    list_editable = ('image',)
 
 
 @admin.register(PhotosItem)

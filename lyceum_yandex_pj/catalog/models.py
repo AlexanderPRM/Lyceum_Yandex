@@ -1,14 +1,15 @@
-from django.db import models
-from core.models import BaseCatalog
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.core.validators import RegexValidator
 from catalog.validators import validate_text
+from core.models import BaseCatalog
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    RegexValidator)
+from django.db import models
+from django.db.models.query import Prefetch
 
 
 class Tag(BaseCatalog):
     slug = models.SlugField(max_length=200,
                             unique=True,
-                            verbose_name='Слаг',
+                            verbose_name='слаг',
                             help_text='Используйте только цифры, '
                                       'буквы латиницы и символы - и _',
                             validators=[
@@ -17,8 +18,8 @@ class Tag(BaseCatalog):
                             )
 
     class Meta:
-        verbose_name = 'Тег'
-        verbose_name_plural = 'Теги'
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
 
     def __str__(self):
         return self.name
@@ -27,7 +28,7 @@ class Tag(BaseCatalog):
 class Category(BaseCatalog):
     slug = models.SlugField(max_length=200,
                             unique=True,
-                            verbose_name='Слаг',
+                            verbose_name='слаг',
                             help_text='Используйте только цифры, '
                                       'буквы латиницы и символы - и _',
                             validators=[
@@ -37,7 +38,7 @@ class Category(BaseCatalog):
                                       validators=[MinValueValidator(0),
                                                   MaxValueValidator(32767)
                                                   ],
-                                      verbose_name='Вес')
+                                      verbose_name='вес')
 
     def __str__(self):
         return self.name
@@ -47,45 +48,67 @@ class Category(BaseCatalog):
         verbose_name_plural = 'Категории'
 
 
+class ItemPublishedManager(models.Manager):
+    def published(self):
+        return (self.get_queryset()
+                    .filter(is_published=True)
+                    .order_by('name')
+                    .select_related('category')
+                    .prefetch_related(Prefetch('tag',
+                                      queryset=Tag.objects
+                                                  .filter(is_published=True)
+                                                  .only('name'))
+                                      )
+                )
+
+
 class Item(BaseCatalog):
-    text = models.TextField(verbose_name='Описание',
+    is_on_main = models.BooleanField(verbose_name='на главной', default=False)
+    text = models.TextField(verbose_name='описание',
                             validators=[
                                 validate_text('превосходно', 'роскошно')])
     category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
                                  related_name='items',
-                                 verbose_name='Категория')
+                                 verbose_name='категория')
     tag = models.ManyToManyField(Tag,
                                  related_name='items',
-                                 verbose_name='Теги')
+                                 verbose_name='теги')
+
+    objects = ItemPublishedManager()
+
+    # def get_item_url(self):
+    #     return reverse('catalog:item_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
 
 
 class PhotoItem(models.Model):
-    image = models.ImageField()
-    item = models.OneToOneField(Item, on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name='фото')
+    item = models.OneToOneField(Item,
+                                on_delete=models.CASCADE)
 
     def __str__(self):
         return self.image.url
 
     class Meta:
-        verbose_name = 'Фото товара'
-        verbose_name_plural = 'Фото товара'
+        verbose_name = 'превью товара'
 
 
 class PhotosItem(models.Model):
     image = models.ImageField()
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item,
+                             on_delete=models.CASCADE,
+                             related_name='photos')
 
     def __str__(self):
         return self.image.url
 
     class Meta:
-        verbose_name = 'Фото товара'
-        verbose_name_plural = 'Фотогалерея товаров'
+        verbose_name = 'фото товара'
+        verbose_name_plural = 'фотогалерея товаров'

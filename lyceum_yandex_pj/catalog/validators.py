@@ -1,6 +1,6 @@
-from django.core.exceptions import ValidationError
-import pymorphy2
 from functools import wraps
+import pymorphy2
+from django.core.exceptions import ValidationError
 
 
 def validate_text(*words):

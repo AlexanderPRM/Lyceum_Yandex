@@ -1,32 +1,70 @@
-from django.test import TestCase, Client
-from django.core.exceptions import ValidationError
 from catalog.models import Category, Item, Tag
+from django.core.exceptions import ValidationError
+from django.test import Client, TestCase
+from django.urls import reverse
+from django.urls.exceptions import NoReverseMatch
 
 
-class StaticURLTest(TestCase):
-    def test_catalog(self):
-        response = Client().get('/')
+class PagesURLTest(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+        cls.category = Category.objects.create(
+                            name='Тестовая Категория',
+                            slug='test',
+                            weight=10)
+        cls.tag = Tag.objects.create(
+                    name='Тестовый тег',
+                    slug='tag'
+                    )
+        cls.item = Item.objects.create(
+                        name='Тест',
+                        text='превосходно',
+                        category=cls.category
+                        )
+        cls.item = Item.objects.create(
+                        name='Тест2',
+                        text='превосходно 2',
+                        category=cls.category
+                        )
+        cls.item = Item.objects.create(
+                        name='На главной',
+                        text='превосходно',
+                        category=cls.category,
+                        is_on_main=True
+                        )
+
+    def test_catalog_detail(self):
+        response = Client().get(reverse(
+                                'catalog:item_detail',
+                                kwargs={'pk': 1}))
+        self.assertIsNotNone(response.context['item'])
         self.assertEqual(response.status_code, 200)
 
-    def test_negative_catalog(self):
-        response = Client().get('/negative_url_for_test/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_repath1_catalog(self):
-        response = Client().get('/catalog/200/')
+    def test_catalog_detail1(self):
+        response = Client().get(reverse(
+                                'catalog:item_detail',
+                                kwargs={'pk': 2}))
+        self.assertIsNotNone(response.context['item'])
         self.assertEqual(response.status_code, 200)
 
-    def test_repath_catalog(self):
-        response = Client().get('/catalog/100/')
+    def test_catalog_list(self):
+        response = Client().get(reverse('catalog:item_list'))
+        self.assertIsNotNone(response.context['items'])
+        self.assertEqual(response.status_code, 200)
+
+    def test_homepage_main(self):
+        response = Client().get(reverse('homepage:main'))
+        self.assertIsNotNone(response.context['items'])
         self.assertEqual(response.status_code, 200)
 
     def test_negative4_catalog(self):
-        response = Client().get('/catalog/-200/')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(NoReverseMatch):
+            Client().get(reverse('catalog:item_detail', kwargs={'pk': -200}))
 
     def test_negative5_catalog(self):
-        response = Client().get('/catalog/0/')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(NoReverseMatch):
+            Client().get(reverse('catalog:item_detail', kwargs={'pk': 0}))
 
 
 class ModelsTest(TestCase):
