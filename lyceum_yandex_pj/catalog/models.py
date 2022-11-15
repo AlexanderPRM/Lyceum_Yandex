@@ -1,22 +1,11 @@
 from catalog.validators import validate_text
-from core.models import BaseCatalog
-from django.core.validators import (MaxValueValidator, MinValueValidator,
-                                    RegexValidator)
+from core.models import BaseCatalog, SlugMixin
+from django.core.validators import (MaxValueValidator, MinValueValidator)
 from django.db import models
 from django.db.models.query import Prefetch
 
 
-class Tag(BaseCatalog):
-    slug = models.SlugField(max_length=200,
-                            unique=True,
-                            verbose_name='слаг',
-                            help_text='Используйте только цифры, '
-                                      'буквы латиницы и символы - и _',
-                            validators=[
-                                RegexValidator(
-                                    regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$')]
-                            )
-
+class Tag(BaseCatalog, SlugMixin):
     class Meta:
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
@@ -25,15 +14,7 @@ class Tag(BaseCatalog):
         return self.name
 
 
-class Category(BaseCatalog):
-    slug = models.SlugField(max_length=200,
-                            unique=True,
-                            verbose_name='слаг',
-                            help_text='Используйте только цифры, '
-                                      'буквы латиницы и символы - и _',
-                            validators=[
-                                RegexValidator(
-                                    regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$',)])
+class Category(BaseCatalog, SlugMixin):
     weight = models.SmallIntegerField(default=100,
                                       validators=[MinValueValidator(0),
                                                   MaxValueValidator(32767)
