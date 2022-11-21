@@ -31,6 +31,13 @@
                     class="nav-link"
                     {% endif %} class="nav-link" href="{% url 'about:main' %}">About</a>
               </li>
+              <li class="nav-item">
+                <a {% if view_name == 'feedback:feedback' %} 
+                    class="nav-link active"
+                    {% else %}
+                    class="nav-link"
+                    {% endif %} class="nav-link" href="{% url 'feedback:feedback' %}">Feedback</a>
+              </li>
             </ul>
             {% endwith %}
             <span class="navbar-text">
