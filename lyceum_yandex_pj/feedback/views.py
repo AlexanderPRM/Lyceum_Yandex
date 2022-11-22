@@ -2,7 +2,6 @@ from django.shortcuts import render
 from feedback.forms import FeedBackForm
 from django.core.mail import send_mail
 from django.shortcuts import redirect
-from feedback.models import FeedBack
 
 
 def feedback(request):
