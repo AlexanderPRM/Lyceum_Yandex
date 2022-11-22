@@ -19,8 +19,7 @@ def feedback(request):
             ['nathan920@yandex.ru'],
             fail_silently=False
         )
-        FeedBack.objects.create(text=text, mail=mail).save()
-
+        form.save()
         return redirect('feedback:feedback')
     return render(
                 request,

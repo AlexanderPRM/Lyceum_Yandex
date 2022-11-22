@@ -1,3 +1,8 @@
-# from django.contrib import admin
+from django.contrib import admin
+from feedback.models import FeedBack
 
-# Register your models here.
+
+@admin.register(FeedBack)
+class FeedBackAdmin(admin.ModelAdmin):
+    list_display = ('text', 'mail', 'created_on')
+    list_display_links = ('text',)
