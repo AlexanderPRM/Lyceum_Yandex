@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'includes/form_errors.html' %}
+    <section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <br>
+            <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Профиль</h2>
+
+                <form method="POST">
+                {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-outline mb-4">
+                            {{ field }}
+                            <label class="form-label" for="form3Example1cg">{{ field.label_tag }}</label>
+                        </div>
+                    {% endfor %}
+                    <div class="form-outline mb-4">
+                        <u><a href="{% url 'users:password_change' %}" class="btn btn-primary btn-sm">Изменить пароль</a></u>
+                    </div>
+                    <div class="form-outline mb-">
+                        <button type="submit"
+                        class="btn btn-secondary btn-block btn-lg gradient-custom-4 text-body">Сохранить</button>
+                    </div>
+
+                <p class="text-center text-muted mt-5 mb-0"><a href="{% url 'users:logout' %}"
+                    class="fw-bold text-body"><u>Выйти</u></a></p>
+
+                </form>
+
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}

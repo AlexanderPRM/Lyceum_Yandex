@@ -65,3 +65,6 @@ class PhotosItemAdmin(admin.ModelAdmin):
 
     img_thumb.short_description = 'Превью'
     img_thumb.allow_tags = True
+
+
+# admin.site.unregister(SummernoteModelAdmin)

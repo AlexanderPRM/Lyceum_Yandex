@@ -2,16 +2,23 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-secondary">
         <div class="container-fluid">
-            <a href="\" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                <img src='{% static "img/favicon/favicon.ico" %}'>
-            </a>
           <div class="collapse navbar-collapse" id="navbarText">
+            <div class="btn-group">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                Account
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'users:login' %}">Вход</a></li>
+                <li><a class="dropdown-item" href="{% url 'users:register' %}">Создать аккаунт</a></li>
+                <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+              </ul>
+            </div>
             {% with request.resolver_match.view_name as view_name %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a {% if view_name == 'homepage:main' %}
                     class="nav-link active"
-                    {% else %}
+                   {% else %}
                     class="nav-link"
                     {% endif %} 
                     aria-current="page" href="{% url 'homepage:main' %}"">Homepage</a>
@@ -40,10 +47,7 @@
               </li>
             </ul>
             {% endwith %}
-            <span class="navbar-text">
-              Тут будет какая-то инфа
-            </span>
           </div>
         </div>
       </nav>
- 
+</header>

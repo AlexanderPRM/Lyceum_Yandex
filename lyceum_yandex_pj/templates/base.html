@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=!, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     <link rel="icon" type="image/png" sizes="32x32" href='{% static "img/favicon/favicon-32x32.png" %}'>
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href='{% static "img/favicon/site.webmanifest" %}'>
@@ -15,7 +16,7 @@
     <title>Магазин</title>
 </head>
     {% include 'includes/header.html' %}
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% block content %}
     {% endblock %}
 </body>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+<body>
+    {% block content %}
+    {% include 'includes/form_errors.html' %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-6 offset-md-3">
+                    <h2 class="text-center text-dark mt-5">Вход в аккаунт</h2>
+                    <div class="card my-5">
+            
+                      <form class="card-body cardbody-color p-lg-5">
+            
+                        <div class="text-center">
+                          <img src="{% static 'img\favicon\android-chrome-512x512.png' %}" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                            width="200px" alt="profile">
+                        </div>
+                        <div class="container-sm">
+                            {% for field in form %}
+                                <div class="form-outline mb-4">
+                                    {{ field }}
+                                    <label class="form-label">{{ field.label_tag }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="container-sm">
+                          <u><a href="{% url 'users:password_reset' %}" class="btn btn-primary btn-sm">Забыли пароль?</a></u>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-secondary btn-block btn-lg gradient-custom-4 text-body">Войти</button>
+                        </div>
+                        <br>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">Не зарегистрированы? <a href="{% url 'users:register' %}" class="text-dark fw-bold">
+                            Создать аккаунт
+                            </a>
+                        </div>
+                      </form>
+                    </div>
+            
+                  </div>
+                </div>
+              </div>
+        </form>
+    {% endblock %}
+</body>
