@@ -13,12 +13,11 @@ def profile(request):
             'form': user_form,
             'user': request.user
         }
-    if request.method == 'POST' and user_form.is_valid():
+    if user_form.is_valid():
         user_form.save()
         # messages.success(request, f'Your account has been updated!')
         return redirect('users:profile')
-    else:
-        return render(request, 'pages/users/profile.html', context)
+    return render(request, 'pages/users/profile.html', context)
 
 
 def register(request):
@@ -26,13 +25,12 @@ def register(request):
     context = {
             'form': form
         }
-    if request.method == 'POST' and form.is_valid():
+    if form.is_valid():
         form.save()
         # username = form.cleaned_data.get('username')
         # messages.success(request, f'Создан аккаунт {username}!')
         return redirect('users:profile')
-    else:
-        return render(request, 'pages/users/register.html', context=context)
+    return render(request, 'pages/users/register.html', context=context)
 
 
 def users_list(request):

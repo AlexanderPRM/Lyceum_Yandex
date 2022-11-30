@@ -15,7 +15,9 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     auto_now_add=True)
     is_active = models.BooleanField(_('активный'), default=True)
     is_staff = models.BooleanField(_('персонал'), default=False,)
-    birthday = models.DateField(verbose_name='день рождения', null=True)
+    birthday = models.DateField(verbose_name='день рождения',
+                                null=True,
+                                blank=True)
 
     objects = UserManager()
 

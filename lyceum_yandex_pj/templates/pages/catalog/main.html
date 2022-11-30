@@ -3,13 +3,17 @@
 <div class="container text-center g-2">
     <div class="row row-cols-3 row-cols-lg-1 align-items-stretch g-2 py-3">
         {% for item in items %}
-            {% ifchanged item.category.name %} 
-                <h5 class="pb-2 border-bottom my-1">{{ item.category.name }}</h2>
-            {% endifchanged %}
-                <div class="col">
-                    {% include 'includes/item.html' %}
-                </div>
-    {% endfor %}
+            <div class="col-6 col-md-4">
+                {% ifchanged item.category.name %} 
+                    <div class="container">
+                        <h5 class="pb-2 border-bottom my-1">{{ item.category.name }}</h5>
+                    </div>
+                {% endifchanged %}
+                    <div class="col">
+                        {% include 'includes/item.html' %}
+                    </div>
+            </div>
+        {% endfor %}
 
 </div>
 {% endblock %}
