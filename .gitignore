@@ -132,3 +132,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/lyceum_yandex_pj/static_dev/
