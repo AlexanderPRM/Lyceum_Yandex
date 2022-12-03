@@ -1,11 +1,54 @@
-from catalog.validators import validate_text
-from core.models import BaseCatalog, SlugMixin
 from django.core.validators import (MaxValueValidator, MinValueValidator)
 from django.db import models
-from django.db.models.query import Prefetch
+
+from catalog.validators import ContainsOneOfWorldValidator
+from core.models import BaseCatalog, SlugMixin
+
+
+class CategoryManager(models.Manager):
+    def published_cat(self):
+        return (self.get_queryset().filter(is_published=True))
+
+
+class TagManager(models.Manager):
+    def published_tags(self):
+        return (self.get_queryset().filter(is_published=True))
+
+
+class ItemManager(models.Manager):
+    def published_item(self):
+        return (
+            self.get_queryset()
+                .filter(is_published=True)
+                .select_related('category')
+                .order_by('category__name', 'name')
+                .prefetch_related(
+                    models.Prefetch('tags',
+                                    queryset=Tag.objects.published_tags())))
+
+    def item_on_main_page(self):
+        return (self.get_queryset()
+                    .filter(is_on_main=True, is_published=True)
+                    .order_by('name')
+                    .select_related('category')
+                    .prefetch_related(
+                        models.Prefetch('tags',
+                                        queryset=Tag.objects.published_tags(
+                                        ))))
+
+    def item_detail(self, pk):
+        return (self.get_queryset()
+                    .filter(is_published=True, pk=pk)
+                    .select_related('category')
+                    .prefetch_related(
+                        models.Prefetch('tags',
+                                        queryset=Tag.objects.published_tags(
+                                        ))))
 
 
 class Tag(BaseCatalog, SlugMixin):
+    objects = TagManager()
+
     class Meta:
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
@@ -21,6 +64,8 @@ class Category(BaseCatalog, SlugMixin):
                                                   ],
                                       verbose_name='вес')
 
+    objects = CategoryManager()
+
     def __str__(self):
         return self.name
 
@@ -29,37 +74,21 @@ class Category(BaseCatalog, SlugMixin):
         verbose_name_plural = 'Категории'
 
 
-class ItemPublishedManager(models.Manager):
-    def published(self):
-        return (self.get_queryset()
-                    .filter(is_published=True)
-                    .order_by('name')
-                    .select_related('category')
-                    .prefetch_related(Prefetch('tag',
-                                      queryset=Tag.objects
-                                                  .filter(is_published=True)
-                                                  .only('name'))
-                                      )
-                )
-
-
 class Item(BaseCatalog):
     is_on_main = models.BooleanField(verbose_name='на главной', default=False)
     text = models.TextField(verbose_name='описание',
                             validators=[
-                                validate_text('превосходно', 'роскошно')])
+                                ContainsOneOfWorldValidator('превосходно',
+                                                            'роскошно')])
     category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
                                  related_name='items',
                                  verbose_name='категория')
-    tag = models.ManyToManyField(Tag,
-                                 related_name='items',
-                                 verbose_name='теги')
+    tags = models.ManyToManyField(Tag,
+                                  related_name='items',
+                                  verbose_name='теги')
 
-    objects = ItemPublishedManager()
-
-    # def get_item_url(self):
-    #     return reverse('catalog:item_detail', kwargs={'pk': self.pk})
+    objects = ItemManager()
 
     def __str__(self):
         return self.name

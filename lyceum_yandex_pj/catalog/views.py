@@ -1,14 +1,13 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Item, Category
+from .models import Item
 
 
 def item_list(request):
-    context = {'items': Item.objects.published().order_by('category')
-                            .only('name', 'category', 'text'),
-               'categories': Category.objects.all().order_by('-name')}
-    return render(request,
-                  template_name='pages/catalog/main.html',
-                  context=context)
+    items = Item.objects.published_item()
+    context = {
+        'items': items
+    }
+    return render(request, 'pages/catalog/main.html', context)
 
 
 def item_detail(request, pk):

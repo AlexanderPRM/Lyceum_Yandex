@@ -1,20 +1,19 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="container text-center g-2">
+{% extends "base.html"%}
+{% load thumbnail %}
+{% load static %}
 
-        {% for category in categories %}
-            <div class="container">
-                <h5 class="pb-2 border-bottom my-1">{{ category }}</h5>
+{% block content %}
+<div class="container">
+    {% for item in items %}
+            {% ifchanged item.category %}
+                <h1 class="card-header">Категория: {{item.category}}</h1>
+            {% endifchanged %}
+            <div class="card">
+                {% include "includes/item.html" %}
             </div>
-            <div class="row row-cols-3 row-cols-lg-3 align-items-stretch g-2 py-3">
-                {% for item in items %}
-                    {% if item.category == category %}
-                        <div class="col">
-                            {% include 'includes/item.html' %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+            <br>
+    {% endfor %}
+    
 </div>
+
 {% endblock %}

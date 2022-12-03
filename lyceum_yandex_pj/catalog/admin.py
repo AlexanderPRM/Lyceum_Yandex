@@ -2,6 +2,7 @@ from catalog.models import Category, Item, PhotoItem, PhotosItem, Tag
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.models import Attachment
 from sorl.thumbnail import get_thumbnail
 
 
@@ -13,7 +14,7 @@ class ItemAdmin(SummernoteModelAdmin):
     list_display = ('id', 'name', 'is_published', 'img_thumb')
     list_editable = ('is_published',)
     list_display_links = ('name',)
-    filter_horizontal = ('tag',)
+    filter_horizontal = ('tags',)
     summernote_fields = ('text',)
     inlines = (PhotoItemInline,)
 
@@ -67,4 +68,4 @@ class PhotosItemAdmin(admin.ModelAdmin):
     img_thumb.allow_tags = True
 
 
-# admin.site.unregister(SummernoteModelAdmin)
+admin.site.unregister(Attachment)

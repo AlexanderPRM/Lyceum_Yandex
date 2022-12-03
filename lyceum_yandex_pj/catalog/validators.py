@@ -1,53 +1,20 @@
-from functools import wraps
-import pymorphy2
-from django.core.exceptions import ValidationError
+from __future__ import annotations
+
+import re
+
+import django.core.exceptions
+import django.utils.deconstruct
 
 
-def validate_text(*words):
-    @wraps(validate_text)
-    def sub_validator(value):
-        morph = pymorphy2.MorphAnalyzer(lang='ru')
-        value = value.lower()
-        for word in words:
-            parse_word = morph.parse(word)[1]
-            if any([
-                parse_word.word in value,
-                parse_word.normal_form in value,
-                parse_word.inflect({'nomn'}).word in value,
-               parse_word.inflect({'gent'}).word in value,
-               parse_word.inflect({'datv'}).word in value,
-               parse_word.inflect({'loct'}).word in value,
-               parse_word.inflect({'ablt'}).word in value,
-               parse_word.inflect({'accs'}).word in value,
-               parse_word.inflect({'acc2'}).word in value,
-               parse_word.inflect({'gen2'}).word in value]):
-                return value
-        raise ValidationError(f'В описании обязательно должно быть - '
-                              f'{" & ".join(words)}')
-    return sub_validator
+@django.utils.deconstruct.deconstructible
+class ContainsOneOfWorldValidator:
+    def __init__(self, *words: list[str]):
+        self._words_for_pattern = '|'.join(words)
+        self._regexp = re.compile(
+            fr'\b({self._words_for_pattern})\b', re.I
+        )
 
-# На будущее :)
-# class ValidateText:
-#     def __init__(self, *words):
-#         self.words = words
-
-#     def __call__(self, value):
-#         morph = pymorphy2.MorphAnalyzer(lang='ru')
-#         value = value.lower()
-#         for word in self.words:
-#             parse_word = morph.parse(word)[1]
-#             if any([
-#                 parse_word.word in value,
-#                 parse_word.normal_form in value,
-#                 parse_word.inflect({'nomn'}).word in value,
-#                parse_word.inflect({'gent'}).word in value,
-#                parse_word.inflect({'datv'}).word in value,
-#                parse_word.inflect({'loct'}).word in value,
-#                parse_word.inflect({'ablt'}).word in value,
-#                parse_word.inflect({'accs'}).word in value,
-#                parse_word.inflect({'acc2'}).word in value,
-#                parse_word.inflect({'gen2'}).word in value]):
-#                 return value
-#         raise ValidationError(
-#                         f'В описании обязательно должно быть - '
-#                         f'{" & ".join(self.words)}')
+    def __call__(self, value: str):
+        if not self._regexp.search(value):
+            raise django.core.exceptions.ValidationError(
+                f'Обязательно использовать слова: {" ".join(self._words)}')

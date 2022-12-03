@@ -1,6 +1,8 @@
 from django.contrib import admin
-from users.models import User
+from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
+from users.models import User
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
 
 
@@ -29,3 +31,6 @@ class UserAdmin(BaseUserAdmin):
                             'email', 'password1', 'password2',
                             'is_staff', 'is_active')}),
                         )
+
+
+admin.site.unregister(Group)
