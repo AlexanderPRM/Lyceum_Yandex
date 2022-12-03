@@ -14,6 +14,9 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+                  {% if request.user.is_superuser %}
+                    <li><a class="dropdown-item" href="{% url 'users:users_list' %}">Список пользователей</a></li>
+                  {% endif %}
                   <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
                 </ul>
               {% else %}

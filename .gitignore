@@ -1,5 +1,9 @@
 .vscode/
 .idea
+*/static_dev/
+models_shema/
+*/media/cache
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

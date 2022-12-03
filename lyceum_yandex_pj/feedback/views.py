@@ -5,7 +5,12 @@ from django.shortcuts import redirect
 
 
 def feedback(request):
-    form = FeedBackForm(request.POST or None)
+    email = request.user.email
+    print(email)
+    if request.user.is_authenticated:
+        form = FeedBackForm(request.POST or None, mail=email)
+    else:
+        form = FeedBackForm(request.POST or None)
     context = {'form': form}
 
     if request.method == 'POST' and form.is_valid():

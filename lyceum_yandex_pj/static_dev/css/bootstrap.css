@@ -86,10 +86,6 @@
   }
 }
 
-p.main_info {
-  text-align: center;
-}
-
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
