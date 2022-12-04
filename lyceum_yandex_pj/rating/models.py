@@ -5,13 +5,16 @@ from users.models import User
 
 
 class RatingManager(models.Manager):
-    def item_avg_rate(self):
-        return (self.get_queryset()
-                    .aggregate(
-                              models.Avg('rate'),
-                              models.Count('rate')
-                              )
+    def item_avg_rate(self, item_pk):
+        return (
+            self.get_queryset()
+                .filter(
+                item__pk=item_pk,)
+            .aggregate(
+                models.Avg('rate'),
+                models.Count('rate')
                 )
+            )
 
     def get_user_rate(self, user_pk, item_pk):
         return (self.get_queryset()
@@ -20,7 +23,7 @@ class RatingManager(models.Manager):
                         item__pk=item_pk)
                     .select_related('item', 'user')
                     .values('rate')
-                )
+                ).first
 
 
 class Star(models.IntegerChoices):
