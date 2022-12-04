@@ -8,7 +8,7 @@ import django.utils.deconstruct
 @django.utils.deconstruct.deconstructible
 class ContainsOneOfWorldValidator:
     def __init__(self, *words: list[str]):
-        self.words_for_pattern = ' | '.join(words)
+        self.words_for_pattern = '|'.join(words)
         self.regexp = re.compile(
             fr'\b({self.words_for_pattern})\b', re.I
         )

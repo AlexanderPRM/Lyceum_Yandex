@@ -23,7 +23,6 @@ class ItemAdmin(SummernoteModelAdmin):
     inlines = (PhotoItemInline, PhotosItemInline)
 
     def get_img(self, obj):
-        print(self)
         return get_thumbnail(
                             obj.photoitem.image,
                             '300x300',
