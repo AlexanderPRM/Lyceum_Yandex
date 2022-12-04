@@ -1,13 +1,12 @@
 from django.shortcuts import render
-from feedback.forms import FeedBackForm
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 
+from feedback.forms import FeedBackForm
+
 
 def feedback(request):
-    # if request.user.is_authenticated:
-    #     form = FeedBackForm(request.POST or None)
-    # else:
     form = FeedBackForm(request.POST or None)
     context = {'form': form}
 
@@ -19,9 +18,11 @@ def feedback(request):
             text,
             mail,
             ['nathan920@yandex.ru'],
-            fail_silently=False
+            fail_silently=True
         )
         form.save()
+        messages.success(request, 'Сообщение отправлено,'
+                                  'мы вас очень ценим(нет)')
         return redirect('feedback:feedback')
     return render(
         request,

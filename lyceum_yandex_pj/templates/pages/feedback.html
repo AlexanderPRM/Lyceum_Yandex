@@ -5,6 +5,10 @@
     <div class="row">
         <form method="post">
             {% csrf_token %}
+            {% for msg in messages%}
+                <h4 class="alert-heading align-items-center"> {{msg}} </h4>
+            {% endfor %}
+            {% include 'includes/form_errors.html' %}
             {% for field in form %}
             <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example1cg">{{ field.label_tag }}</label>
