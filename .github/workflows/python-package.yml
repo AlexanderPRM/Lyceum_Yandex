@@ -29,6 +29,13 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Python flake8 Lint
+      uses: py-actions/flake8@v2.2.1
+      with:
+        path: "main"
+        update-pip: true
+        flake8-version: "5.0."
+        plugins: "flake8-quotes"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
