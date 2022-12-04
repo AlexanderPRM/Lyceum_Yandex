@@ -22,6 +22,7 @@ class FeedbackPage(FormView):
             fail_silently=True
         )
         form.save()
-        messages.success(self.request, 'Сообщение отправлено,'
-                                       'мы вас очень ценим(нет)')
+        messages.success(
+            self.request, 'Сообщение отправлено,'
+            'мы вас очень ценим(нет)')
         return super(FeedbackPage, self).form_valid(form)
