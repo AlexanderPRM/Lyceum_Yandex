@@ -10,7 +10,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
 from users.forms import (UserLoginForm, PasswordChangeForm,
                          CustomPasswordResetForm,
                          CustomPasswordResetConfirmForm)
-from users.views import profile, register, users_list, user_detail
+from users.views import ProfileView, RegisterView, UsersList, UserDetail
 
 
 app_name = 'users'
@@ -50,8 +50,8 @@ urlpatterns = [
                             template_name='pages/users/'
                                           'password_reset_complete.html'
                             ), name='password_reset_complete'),
-    path('register/', register, name='register'),
-    path('profile/', profile, name='profile'),
-    path('users_list/', users_list, name='users_list'),
-    path('user_detail/<pk>', user_detail, name='user_detail')
+    path('register/', RegisterView.as_view(), name='register'),
+    path('profile/<pk>', ProfileView.as_view(), name='profile'),
+    path('users_list/', UsersList.as_view(), name='users_list'),
+    path('user_detail/<pk>', UserDetail.as_view(), name='user_detail')
 ]

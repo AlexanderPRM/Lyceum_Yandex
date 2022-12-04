@@ -10,7 +10,7 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Профиль</h2>
-
+                            {% include 'includes/form_errors.html' %}
                             <form method="POST">
                             {% csrf_token %}
                                 {% for field in form %}

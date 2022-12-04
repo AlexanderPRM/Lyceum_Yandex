@@ -7,8 +7,8 @@
     </div>
     <div class="card-body">
         <h5 class="card-title"><a href="{% url 'catalog:item_detail' item.id %}">{{ item.name }}</a></h5>
-        <p class="card-text">{{ item.text|truncatewords_html:10 }}</p>
-    </div>  
+        <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
+    </div>
     <div class="card-footer">
         <h6>Теги:
         {% for tag in item.tags.all %}

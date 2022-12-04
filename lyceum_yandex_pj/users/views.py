@@ -1,46 +1,56 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+from django.http import Http404
 
 from users.forms import UserUpdateForm, CustomUserCreationForm
 from users.models import User
 
 
-@login_required
-def profile(request):
-    user_form = UserUpdateForm(request.POST or None, instance=request.user)
-    context = {
-            'form': user_form,
-            'user': request.user
-        }
-    if user_form.is_valid():
-        user_form.save()
-        return redirect('users:profile')
-    return render(request, 'pages/users/profile.html', context)
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    login_url = reverse_lazy('users:login')
+    template_name = 'pages/users/profile.html'
+
+    def get_success_url(self) -> str:
+        success_url = reverse_lazy(
+            'users:profile',
+            kwargs={'pk': self.request.user.id}
+            )
+        return success_url
+
+    def get(self, request, *args: str, **kwargs):
+
+        if request.user.id == int(kwargs['pk']) or request.user.is_superuser:
+            return super().get(request, *args, **kwargs)
+        raise Http404
 
 
-def register(request):
-    form = CustomUserCreationForm(request.POST or None)
-    context = {
-            'form': form
-        }
-    if form.is_valid():
-        form.save()
-        return redirect('users:profile')
-    return render(request, 'pages/users/register.html', context=context)
+class RegisterView(CreateView):
+    model = User
+    form_class = CustomUserCreationForm
+    template_name = 'pages/users/register.html'
+
+    def get_success_url(self) -> str:
+        success_url = reverse_lazy(
+            'users:login'
+            )
+        return success_url
 
 
-def users_list(request):
-    users_list = User.objects.filter(is_active=True)
-    context = {
-        'users': users_list
-    }
-    return render(request, 'pages/users/users_list.html', context=context)
+class UsersList(ListView):
+    model = User
+    template_name = 'pages/users/users_list.html'
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=True)
 
 
-def user_detail(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    context = {
-        'user': user
-    }
-    return render(request, 'pages/users/user_detail.html', context=context)
+class UserDetail(DetailView):
+    model = User
+    template_name = 'pages/users/user_detail.html'
+    context_object_name = 'user'
