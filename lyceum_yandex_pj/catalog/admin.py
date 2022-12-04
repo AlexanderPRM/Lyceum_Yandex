@@ -1,9 +1,10 @@
-from catalog.models import Category, Item, PhotoItem, PhotosItem, Tag
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django_summernote.admin import SummernoteModelAdmin
 from django_summernote.models import Attachment
 from sorl.thumbnail import get_thumbnail
+
+from catalog.models import Category, Item, PhotoItem, PhotosItem, Tag
 
 
 class PhotoItemInline(admin.TabularInline):

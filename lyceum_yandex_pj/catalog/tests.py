@@ -1,8 +1,9 @@
-from catalog.models import Category, Item, Tag
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.urls.exceptions import NoReverseMatch
+
+from catalog.models import Category, Item, Tag
 
 
 class PagesURLTest(TestCase):

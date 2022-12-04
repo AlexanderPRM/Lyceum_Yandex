@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import re
 
 import django.core.exceptions
@@ -9,6 +10,7 @@ import django.utils.deconstruct
 class ContainsOneOfWorldValidator:
     def __init__(self, *words: list[str]):
         self.words_for_pattern = '|'.join(words)
+        self.words = words
         self.regexp = re.compile(
             fr'\b({self.words_for_pattern})\b', re.I
         )
@@ -17,4 +19,4 @@ class ContainsOneOfWorldValidator:
         if not self.regexp.search(value):
             raise django.core.exceptions.ValidationError(
                 'Обязательно использовать слова: '
-                f'{"".join(self.words_for_pattern)}')
+                f'{"".join(self.words)}')

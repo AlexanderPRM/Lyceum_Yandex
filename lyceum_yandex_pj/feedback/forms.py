@@ -1,5 +1,6 @@
 from django import forms
-from .models import FeedBack
+
+from feedback.models import FeedBack
 
 
 class FeedBackForm(forms.ModelForm):
@@ -13,11 +14,7 @@ class FeedBackForm(forms.ModelForm):
     class Meta:
         model = FeedBack
         fields = ('text', 'mail')
-        # labels = {
-        #         'mail': 'Ваша почта',
-        #         'text': 'Содержимое обращения'}
         help_texts = {
             'text': 'В этом поле введите текст своего обращения.',
             'mail': 'Введите вашу почту.'
         }
-        # widgets = {'text': forms.TextInput(attrs={'class': 'form-control'})}

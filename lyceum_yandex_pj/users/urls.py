@@ -1,6 +1,3 @@
-from users.forms import (UserLoginForm, PasswordChangeForm,
-                         CustomPasswordResetForm,
-                         CustomPasswordResetConfirmForm)
 from django.urls import path
 from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordChangeView,
@@ -9,6 +6,10 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetDoneView,
                                        PasswordResetConfirmView,
                                        PasswordResetCompleteView)
+
+from users.forms import (UserLoginForm, PasswordChangeForm,
+                         CustomPasswordResetForm,
+                         CustomPasswordResetConfirmForm)
 from users.views import profile, register, users_list, user_detail
 
 

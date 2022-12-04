@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from users.forms import UserUpdateForm, CustomUserCreationForm
-# from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
+
+from users.forms import UserUpdateForm, CustomUserCreationForm
 from users.models import User
 
 
@@ -15,7 +15,6 @@ def profile(request):
         }
     if user_form.is_valid():
         user_form.save()
-        # messages.success(request, f'Your account has been updated!')
         return redirect('users:profile')
     return render(request, 'pages/users/profile.html', context)
 
@@ -27,8 +26,6 @@ def register(request):
         }
     if form.is_valid():
         form.save()
-        # username = form.cleaned_data.get('username')
-        # messages.success(request, f'Создан аккаунт {username}!')
         return redirect('users:profile')
     return render(request, 'pages/users/register.html', context=context)
 
