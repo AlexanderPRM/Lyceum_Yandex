@@ -88,6 +88,12 @@ class ModelsTest(TestCase):
             slug='tag'
             )
 
+    @classmethod
+    def tearDownClass(self) -> None:
+        super().tearDownClass()
+        self.category.delete()
+        self.tag.delete()
+
     def test_category_negative(self):
         category_count = Category.objects.count()
         with self.assertRaises(ValidationError):
