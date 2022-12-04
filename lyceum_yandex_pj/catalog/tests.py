@@ -36,25 +36,23 @@ class PagesURLTest(TestCase):
             is_on_main=True
             )
 
-    def test_catalog_detail_pk1(self):
+    def test_negative_catalog_detail_pk1(self):
         response = Client().get(
             reverse(
                     'catalog:item_detail',
                     kwargs={'pk': 1}
                     )
                 )
-        self.assertIsNotNone(response.context['item'])
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
-    def test_catalog_detail_pk2(self):
+    def test_negative_catalog_detail_pk2(self):
         response = Client().get(
             reverse(
                     'catalog:item_detail',
                     kwargs={'pk': 2}
                     )
                 )
-        self.assertIsNotNone(response.context['item'])
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_catalog_list(self):
         response = Client().get(reverse('catalog:item_list'))
@@ -199,3 +197,7 @@ class ModelsTest(TestCase):
             self.tag.full_clean()
             self.tag.save()
         self.assertEqual(Tag.objects.count(), tag_count)
+
+    def tearDown(self):
+        Item.objects.all().delete()
+        super().tearDown()
