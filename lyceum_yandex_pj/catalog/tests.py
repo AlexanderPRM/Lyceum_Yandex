@@ -43,7 +43,7 @@ class PagesURLTest(TestCase):
                     kwargs={'pk': 1}
                     )
                 )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
     def test_negative_catalog_detail_pk2(self):
         response = Client().get(
@@ -52,7 +52,7 @@ class PagesURLTest(TestCase):
                     kwargs={'pk': 2}
                     )
                 )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
     def test_catalog_list(self):
         response = Client().get(reverse('catalog:item_list'))
