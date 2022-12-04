@@ -27,7 +27,6 @@ INTERNAL_IPS = [
 
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
-    'rating.apps.RatingConfig',
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
     'feedback.apps.FeedbackConfig',
@@ -131,9 +130,10 @@ AUTH_PROFILE_MODEL = 'users.User'
 
 STATIC_URL = os.path.join(BASE_DIR, '/static/')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static_dev/')
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_dev'),
-)
+    # os.path.join(BASE_DIR, 'static/')
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -144,7 +144,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'send_mails/'
 
 LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/auth/profile/'
 # LOGOUT_REDIRECT_URL = '/auth/logout/'
 
 
