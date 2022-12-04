@@ -1,21 +1,19 @@
-from django.shortcuts import get_object_or_404, render
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .models import Item
 
 
-def item_list(request):
-    items = Item.objects.published_item()
-    context = {
-        'items': items
-    }
-    return render(request, 'pages/catalog/main.html', context)
+class ItemList(ListView):
+    model = Item
+    template_name = 'pages/catalog/main.html'
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return Item.objects.published_item()
 
 
-def item_detail(request, pk):
-    item = get_object_or_404(Item, pk=pk)
-    context = {'item': item}
-    return render(
-        request,
-        template_name='pages/catalog/item_detail.html',
-        context=context
-        )
+class ItemDetail(DetailView):
+    model = Item
+    template_name = 'pages/catalog/item_detail.html'
+    context_object_name = 'item'
