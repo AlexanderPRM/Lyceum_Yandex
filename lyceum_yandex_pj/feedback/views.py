@@ -5,10 +5,10 @@ from django.shortcuts import redirect
 
 
 def feedback(request):
-    if request.user.is_authenticated:
-        form = FeedBackForm(request.POST or None)
-    else:
-        form = FeedBackForm(request.POST or None)
+    # if request.user.is_authenticated:
+    #     form = FeedBackForm(request.POST or None)
+    # else:
+    form = FeedBackForm(request.POST or None)
     context = {'form': form}
 
     if request.method == 'POST' and form.is_valid():
@@ -24,6 +24,7 @@ def feedback(request):
         form.save()
         return redirect('feedback:feedback')
     return render(
-                request,
-                template_name='pages/feedback.html',
-                context=context)
+        request,
+        template_name='pages/feedback.html',
+        context=context
+        )

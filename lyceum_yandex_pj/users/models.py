@@ -12,12 +12,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('фамилия'), max_length=30, blank=True)
     date_joined = models.DateTimeField(
                                     _('дата регистрации'),
-                                    auto_now_add=True)
+                                    auto_now_add=True
+                                        )
     is_active = models.BooleanField(_('активный'), default=True)
     is_staff = models.BooleanField(_('персонал'), default=False,)
-    birthday = models.DateField(verbose_name='день рождения',
-                                null=True,
-                                blank=True)
+    birthday = models.DateField(
+                            verbose_name='день рождения',
+                            null=True,
+                            blank=True
+                                )
 
     objects = UserManager()
 

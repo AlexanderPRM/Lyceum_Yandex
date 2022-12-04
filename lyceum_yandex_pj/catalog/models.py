@@ -58,11 +58,13 @@ class Tag(BaseCatalog, SlugMixin):
 
 
 class Category(BaseCatalog, SlugMixin):
-    weight = models.SmallIntegerField(default=100,
-                                      validators=[MinValueValidator(0),
-                                                  MaxValueValidator(32767)
-                                                  ],
-                                      verbose_name='вес')
+    weight = models.SmallIntegerField(
+                            default=100,
+                            validators=[
+                                        MinValueValidator(0),
+                                        MaxValueValidator(32767)
+                                        ],
+                            verbose_name='вес')
 
     objects = CategoryManager()
 
@@ -70,23 +72,32 @@ class Category(BaseCatalog, SlugMixin):
         return self.name
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
 
 class Item(BaseCatalog):
     is_on_main = models.BooleanField(verbose_name='на главной', default=False)
-    text = models.TextField(verbose_name='описание',
-                            validators=[
-                                ContainsOneOfWorldValidator('превосходно',
-                                                            'роскошно')])
-    category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE,
-                                 related_name='items',
-                                 verbose_name='категория')
-    tags = models.ManyToManyField(Tag,
-                                  related_name='items',
-                                  verbose_name='теги')
+    text = models.TextField(
+        verbose_name='описание',
+        validators=[
+                    ContainsOneOfWorldValidator(
+                                        'превосходно',
+                                        'роскошно'
+                                        )
+                    ]
+            )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='items',
+        verbose_name='категория'
+        )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='items',
+        verbose_name='теги'
+        )
 
     objects = ItemManager()
 
@@ -100,8 +111,10 @@ class Item(BaseCatalog):
 
 class PhotoItem(models.Model):
     image = models.ImageField(verbose_name='фото')
-    item = models.OneToOneField(Item,
-                                on_delete=models.CASCADE)
+    item = models.OneToOneField(
+        Item,
+        on_delete=models.CASCADE
+        )
 
     def __str__(self):
         return self.image.url
@@ -111,10 +124,12 @@ class PhotoItem(models.Model):
 
 
 class PhotosItem(models.Model):
-    image = models.ImageField()
-    item = models.ForeignKey(Item,
-                             on_delete=models.CASCADE,
-                             related_name='photos')
+    image = models.ImageField(verbose_name='фото')
+    item = models.ForeignKey(
+        Item,
+        on_delete=models.CASCADE,
+        related_name='photos'
+        )
 
     def __str__(self):
         return self.image.url

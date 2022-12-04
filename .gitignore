@@ -1,6 +1,6 @@
 .vscode/
 .idea
-*/static_dev/
+static/
 models_shema/
 */media/cache/*
 
@@ -132,4 +132,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/lyceum_yandex_pj/static_dev/

@@ -13,6 +13,7 @@ from users.views import profile, register, users_list, user_detail
 
 
 app_name = 'users'
+
 urlpatterns = [
     path('login/', LoginView.as_view(
                                     template_name='pages/users/login.html',

@@ -10,20 +10,26 @@ class PhotoItemInline(admin.TabularInline):
     model = PhotoItem
 
 
+class PhotosItemInline(admin.TabularInline):
+    model = PhotosItem
+
+
 class ItemAdmin(SummernoteModelAdmin):
     list_display = ('id', 'name', 'is_published', 'img_thumb')
     list_editable = ('is_published',)
     list_display_links = ('name',)
     filter_horizontal = ('tags',)
     summernote_fields = ('text',)
-    inlines = (PhotoItemInline,)
+    inlines = (PhotoItemInline, PhotosItemInline)
 
     def get_img(self, obj):
         print(self)
-        return get_thumbnail(obj.photoitem.image,
-                             "300x300",
-                             crop='center',
-                             qualify=51)
+        return get_thumbnail(
+                            obj.photoitem.image,
+                            '300x300',
+                            crop='center',
+                            qualify=51
+                            )
 
     def img_thumb(self, obj):
         if obj.photoitem.item:
@@ -58,11 +64,10 @@ class PhotosItemAdmin(admin.ModelAdmin):
     readonly_fields = ('img_thumb',)
 
     def get_img(self, obj):
-        return get_thumbnail(obj.image, "300x300", crop='center', qualify=51)
+        return get_thumbnail(obj.image, '300x300', crop='center', qualify=51)
 
     def img_thumb(self, obj):
         return mark_safe(f'<img src="{self.get_img(obj).url}">')
-        # return "Нет изображения"
 
     img_thumb.short_description = 'Превью'
     img_thumb.allow_tags = True
