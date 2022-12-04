@@ -5,5 +5,5 @@ from about import views
 app_name = 'about'
 
 urlpatterns = [
-    path('', views.description, name='main')
+    path('', views.AboutPage.as_view(), name='main')
 ]

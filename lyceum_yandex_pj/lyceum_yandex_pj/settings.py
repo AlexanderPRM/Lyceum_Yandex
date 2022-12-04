@@ -27,6 +27,7 @@ INTERNAL_IPS = [
 
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
+    'rating.apps.RatingConfig',
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
     'feedback.apps.FeedbackConfig',
