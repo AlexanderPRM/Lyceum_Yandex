@@ -36,8 +36,7 @@ class RegisterView(CreateView):
 
     def get_success_url(self) -> str:
         success_url = reverse_lazy(
-            'users:profile',
-            kwargs={'pk': self.request.user.id}
+            'users:login'
             )
         return success_url
 

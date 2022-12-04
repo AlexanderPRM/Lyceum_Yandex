@@ -22,7 +22,6 @@ class RatingManager(models.Manager):
                         user__pk=user_pk,
                         item__pk=item_pk)
                     .select_related('item', 'user')
-                    .values('rate')
                 ).first
 
 
