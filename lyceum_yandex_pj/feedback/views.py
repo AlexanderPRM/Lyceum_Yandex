@@ -14,6 +14,7 @@ class FeedbackPage(FormView):
     def form_valid(self, form):
         text = form.cleaned_data['text']
         mail = form.cleaned_data['mail']
+        print(self.request.user)
         send_mail(
             'Здравствуйте, админ. Вам пришла обратная связь.',
             text,
@@ -22,6 +23,7 @@ class FeedbackPage(FormView):
             fail_silently=True
         )
         form.save()
-        messages.success(self.request, 'Сообщение отправлено,'
-                                       'мы вас очень ценим(нет)')
+        messages.success(
+            self.request, 'Сообщение отправлено,'
+            'мы вас очень ценим(нет)')
         return super(FeedbackPage, self).form_valid(form)
