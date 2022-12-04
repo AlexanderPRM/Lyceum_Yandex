@@ -1,55 +1,57 @@
 {% load static %}
-<header>
-    <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarText">
-            <div class="btn-group">
-              {% if request.user.is_authenticated %}
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                  {% if request.user.first_name %}
-                    {{ request.user.first_name }}
-                  {% else %}
-                    {{ request.user.email }}
-                  {% endif %}
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
-                  {% if request.user.is_superuser %}
-                    <li><a class="dropdown-item" href="{% url 'users:users_list' %}">Список пользователей</a></li>
-                  {% endif %}
-                  <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
-                </ul>
-              {% else %}
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                  Account
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'users:login' %}">Вход</a></li>
-                  <li><a class="dropdown-item" href="{% url 'users:register' %}">Создать аккаунт</a></li>
-                </ul>
-              {% endif %}
-            </div>
-            {% with request.resolver_match.view_name as view_name %}
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link {% if view_name == 'homepage:main' %}active{% endif %}"
-                    aria-current="page" href="{% url 'homepage:main' %}"">Homepage</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if view_name == 'catalog:item_list' %}active{% endif %}"
-                    href="{% url 'catalog:item_list' %}">Catalog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if view_name == 'about:main' %}active{% endif %}"
-                  href="{% url 'about:main' %}">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if view_name == 'feedback:feedback' %}active{% endif %}"
-                  class="nav-link" href="{% url 'feedback:feedback' %}">Feedback</a>
-              </li>
-            </ul>
-            {% endwith %}
-          </div>
-        </div>
-      </nav>
-</header>
+<div class="container">
+	<header>
+		<nav class="navbar navbar-expand-lg bg-secondary">
+			<div class="container-fluid">
+			  <div class="collapse navbar-collapse" id="navbarText">
+				<div class="btn-group">
+				  {% if request.user.is_authenticated %}
+					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+					  {% if request.user.first_name %}
+						{{ request.user.first_name }}
+					  {% else %}
+						{{ request.user.email }}
+					  {% endif %}
+					</button>
+					<ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+					  {% if request.user.is_superuser %}
+						<li><a class="dropdown-item" href="{% url 'users:users_list' %}">Список пользователей</a></li>
+					  {% endif %}
+					  <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+					</ul>
+				  {% else %}
+					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+					  Аккаунт
+					</button>
+					<ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="{% url 'users:login' %}">Вход</a></li>
+					  <li><a class="dropdown-item" href="{% url 'users:register' %}">Создать аккаунт</a></li>
+					</ul>
+				  {% endif %}
+				</div>
+				{% with request.resolver_match.view_name as view_name %}
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				  <li class="nav-item">
+					<a class="nav-link {% if view_name == 'homepage:main' %}active{% endif %}"
+						aria-current="page" href="{% url 'homepage:main' %}"">Главная страница</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link {% if view_name == 'catalog:item_list' %}active{% endif %}"
+						href="{% url 'catalog:item_list' %}">Каталог товаров</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link {% if view_name == 'about:main' %}active{% endif %}"
+					  href="{% url 'about:main' %}">О нас</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link {% if view_name == 'feedback:feedback' %}active{% endif %}"
+					  class="nav-link" href="{% url 'feedback:feedback' %}">Обратная связь</a>
+				  </li>
+				</ul>
+				{% endwith %}
+			  </div>
+			</div>
+		  </nav>
+	</header>
+</div>
