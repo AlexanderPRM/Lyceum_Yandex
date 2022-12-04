@@ -14,7 +14,6 @@ class FeedbackPage(FormView):
     def form_valid(self, form):
         text = form.cleaned_data['text']
         mail = form.cleaned_data['mail']
-        print(self.request.user)
         send_mail(
             'Здравствуйте, админ. Вам пришла обратная связь.',
             text,
