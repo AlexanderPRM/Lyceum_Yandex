@@ -33,7 +33,7 @@ class ItemAdmin(SummernoteModelAdmin):
     def img_thumb(self, obj):
         if obj.photoitem.item:
             return mark_safe(f'<img src="{self.get_img(obj).url}">')
-        return "Нет изображения"
+        return 'Нет изображения'
 
     img_thumb.short_description = 'Превью'
     img_thumb.allow_tags = True
