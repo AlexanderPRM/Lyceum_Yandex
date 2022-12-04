@@ -8,13 +8,13 @@
 				  {% if request.user.is_authenticated %}
 					<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 					  {% if request.user.first_name %}
-						  {{ request.user.first_name }}
+						{{ request.user.first_name }}
 					  {% else %}
-						  {{ request.user.email }}
+						{{ request.user.email }}
 					  {% endif %}
 					</button>
 					<ul class="dropdown-menu">
-					  <li><a class="dropdown-item" href="{% url 'users:profile' request.user.id %}">Профиль</a></li>
+					  <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
 					  {% if request.user.is_superuser %}
 						<li><a class="dropdown-item" href="{% url 'users:users_list' %}">Список пользователей</a></li>
 					  {% endif %}

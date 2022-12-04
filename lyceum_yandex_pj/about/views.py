@@ -1,5 +1,10 @@
-from django.views.generic import TemplateView
+from django.shortcuts import render
 
 
-class AboutPage(TemplateView):
-    template_name = 'pages/about/main.html'
+def description(request):
+    context = {}
+    return render(
+        request,
+        template_name='pages/about/main.html',
+        context=context
+        )
