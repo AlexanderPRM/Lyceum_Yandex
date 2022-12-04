@@ -10,11 +10,6 @@ class FeedbackTests(TestCase):
         super().setUpClass()
         cls.form = FeedBackForm()
 
-    @classmethod
-    def tearDownClass(self) -> None:
-        super().tearDownClass()
-        self.form.delete()
-
     def test_context(self):
         response = Client().get(reverse('feedback:feedback'))
         self.assertIn('form', response.context)
