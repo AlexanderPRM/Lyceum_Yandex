@@ -1,7 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
 
 from catalog.models import Item
 from rating.models import ItemRating
@@ -38,13 +37,3 @@ class ItemDetail(UpdateView, DetailView):
         else:
             context['user_rate'] = None
         return context
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-
-    def get_success_url(self) -> str:
-        success_url = reverse_lazy(
-            'catalog:item_list',
-            )
-        return success_url
