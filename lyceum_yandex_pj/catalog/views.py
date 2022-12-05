@@ -2,6 +2,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.shortcuts import redirect
+from django.core.exceptions import ObjectDoesNotExist
 
 from catalog.models import Item
 from rating.models import ItemRating
@@ -41,17 +42,20 @@ class ItemList(ListView):
 #         return success_url
 
 
-class ItemDetail(UpdateView, DetailView):
+class ItemDetail(DetailView, UpdateView):
     model = Item
     template_name = 'pages/catalog/item_detail.html'
     form_class = RateForm
 
     def get_initial(self, **kwargs):
         initial = super(ItemDetail, self).get_initial(**kwargs)
-        initial['rate'] = ItemRating.objects.get(
-            item__pk=self.kwargs['pk'],
-            user__pk=self.request.user.id).rate
-        return initial
+        try:
+            initial['rate'] = ItemRating.objects.get(
+                item__pk=self.kwargs['pk'],
+                user__pk=self.request.user.id).rate
+            return initial
+        except ObjectDoesNotExist:
+            return initial
 
     def get_context_data(self, **kwargs):
         context = super(ItemDetail, self).get_context_data(**kwargs)
