@@ -28,7 +28,7 @@ class RatingManager(models.Manager):
                 "item",
                 "user",
             )
-        ).get()
+        ).first()
 
 
 class Star(models.IntegerChoices):
