@@ -24,7 +24,6 @@ class ItemDetail(DetailView, UpdateView):
     form_class = RateForm
 
     def get_initial(self, **kwargs):
-        '''Закидываем в форму выбранную оценку, если такая есть'''
         initial = super(ItemDetail, self).get_initial(**kwargs)
         try:
             initial['rate'] = ItemRating.objects.get(
