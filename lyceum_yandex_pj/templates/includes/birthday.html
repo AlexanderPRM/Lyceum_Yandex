@@ -1,6 +1,19 @@
 <div class="container">
-    {% for user in birthdays %}
-        <p>{{ user.email }}</p>
-        <p>{{ user.first_name }}</p>
-    {% endfor %}
+  <h2>Пользователи нашего сайта, у кого сегодня день рождения!</h2>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Почта</th>
+        <th scope="col">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in birthdays %}
+        <tr>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>

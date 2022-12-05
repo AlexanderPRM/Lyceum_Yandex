@@ -16,7 +16,12 @@
             </div>
             <div class="card-footer">
               <h6>Средняя оценка:
-                  <span class="badge bg-secondary">{{ avg_rate.rate__avg }}</span>
+                  {% if avg_rate.rate__avg is None%}
+                    <span class="badge bg-secondary">-</span>
+                  {% else %}
+                    <span class="badge bg-secondary">{{ avg_rate.rate__avg }}</span>
+                  {% endif %}
+                  
               </h6>
               <h6>Всего оценок:
                   <span class="badge bg-secondary">{{ avg_rate.rate__count}}</span>
@@ -36,27 +41,27 @@
                   {% endfor %} 
               </h6>
             </div>
-            </div>
-            {% if user.is_authenticated %}
- 
-    </div>
-    <div class="col-6">
-      <form method="post">
-          {% csrf_token %}
-          {% for field in form %}
-          <div class="form-outline mb-4">
-              {{ field }}
-              {% if field.help_text %}
-                  {{ field.help_text }}
-              {% endif %}
           </div>
-          {% endfor %}
-          <input value="Сохранить оценку" type="submit" class="btn btn-secondary mb-2">
-      </form>
     </div>
-    {% endif %}
+      <div class="col-6">
+        {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-outline mb-4">
+                {{ field }}
+                {% if field.help_text %}
+                    {{ field.help_text }}
+                {% endif %}
+            </div>
+            {% endfor %}
+            <input value="Сохранить оценку" type="submit" class="btn btn-secondary mb-2">
+        </form>
+        {% else %}
+        <h3>Для оценивания товаров небходимо войти</h3>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
-   
 {% endblock %}
