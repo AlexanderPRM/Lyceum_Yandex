@@ -12,8 +12,8 @@ class RatingManager(models.Manager):
                 item__pk=item_pk,
             )
             .aggregate(
-                models.Avg("rate"),
-                models.Count("rate"),
+                models.Avg('rate'),
+                models.Count('rate'),
             )
         )
 
@@ -25,18 +25,18 @@ class RatingManager(models.Manager):
                 item__pk=item_pk,
             )
             .select_related(
-                "item",
-                "user",
+                'item',
+                'user',
             )
         ).first()
 
 
 class Star(models.IntegerChoices):
-    HATE = 1, "Ненависть"
-    DISLIKE = 2, "Неприязнь"
-    NEUTRAL = 3, "Нейтрально"
-    ADORATION = 4, "Обожание"
-    LIKE = 5, "Любовь"
+    HATE = 1, 'Ненависть'
+    DISLIKE = 2, 'Неприязнь'
+    NEUTRAL = 3, 'Нейтрально'
+    ADORATION = 4, 'Обожание'
+    LIKE = 5, 'Любовь'
 
 
 class ItemRating(models.Model):
@@ -47,9 +47,9 @@ class ItemRating(models.Model):
     objects = RatingManager()
 
     class Meta:
-        unique_together = [("item", "user")]
-        verbose_name = "отзыв"
-        verbose_name_plural = "отзывы"
+        unique_together = [('item', 'user')]
+        verbose_name = 'отзыв'
+        verbose_name_plural = 'отзывы'
 
     def __str__(self):
         return str(self.id)
