@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <br>
-    <div class="row">
-        <form method="post">
-            {% csrf_token %}
-            {% for msg in messages%}
-                <h4 class="alert-heading align-items-center"> {{msg}} </h4>
-            {% endfor %}
-            {% include 'includes/form_errors.html' %}
-            {% for field in form %}
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1cg">{{ field.label_tag }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    {{ field.help_text }}
-                {% endif %}
-            </div>
-            {% endfor %}
-            <!-- {{ form.as_p }} -->
-            <input type="submit" class="btn btn-secondary mb-2"></input>
-        </form>
-    </div>
+  <br>
+  <div class="row">
+    <form method="post">
+      {% csrf_token %}
+        {% for msg in messages%}
+          <h4 class="alert-heading align-items-center"> {{msg}} </h4>
+        {% endfor %}
+        {% include 'includes/form_errors.html' %}
+        {% for field in form %}
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example1cg">{{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              {{ field.help_text }}
+            {% endif %}
+          </div>
+        {% endfor %}
+          <input type="submit" class="btn btn-secondary mb-2"></input>
+    </form>
+  </div>
 </div>
 {% endblock %}

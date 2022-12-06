@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row row-cols-3 row-cols-lg-3 align-items-stretch g-2 py-3">
-            <br>    
-            <div class="col-6 col-md-4">
-                <div class="card">
-                    <h5 class="card-title">Почта: {{ user.email }}</h5>
-                    
-                    <p class="card-text">Имя: {{ user.first_name }}</p>
-                    <p class="card-text">Фамилия: {{ user.last_name }}</p>
-                    <p class="card-text">День рождения: {{ user.birthday }}</p>
-                    <p class="card-text">Дата регистрации: {{user.date_joined }}</p>
-                    <p class="card-text">Админ: {{ user.is_staff }}</p>
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <div class="row row-cols-3 row-cols-lg-3 align-items-stretch g-2 py-3">
+    <br>
+    <div class="col-6 col-md-4">
+      <div class="card">
+        <h5 class="card-title">Почта: {{ user.email }}</h5>
+
+        <p class="card-text">Имя: {{ user.first_name }}</p>
+        <p class="card-text">Фамилия: {{ user.last_name }}</p>
+        <p class="card-text">День рождения: {{ user.birthday }}</p>
+        <p class="card-text">Дата регистрации: {{user.date_joined }}</p>
+        <p class="card-text">Админ: {{ user.is_staff }}</p>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock %}

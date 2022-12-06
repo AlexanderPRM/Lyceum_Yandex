@@ -3,46 +3,46 @@
 <div class=" py-3">
   <div class="container">
     <div class="row">
-        <div class="col-6">
-          <div class="card">
-            <img src="{{ item.photoitem.image.url }}" class="card-img-top" alt="Фото товара отсутствует">
-            <div class="card-header">
-              <p class="card-text">Категория: {{ item.category.name }}</p>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ item.name }}</h5>
-              <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <div class="card-footer">
-              <h6>Средняя оценка:
-                  {% if avg_rate.rate__avg is None%}
-                    <span class="badge bg-secondary">-</span>
-                  {% else %}
-                    <span class="badge bg-secondary">{{ avg_rate.rate__avg }}</span>
-                  {% endif %}
-                  
-              </h6>
-              <h6>Всего оценок:
-                  <span class="badge bg-secondary">{{ avg_rate.rate__count}}</span>
-              </h6>
-              <h6>Ваша оценка:
-                  {% if user_rate.rate is None %} 
-                      <span class="badge bg-secondary">Этот товар не был оценен вами!</span>
-                  {% else %}
-                      <span class="badge bg-secondary">{{ user_rate.get_rate_display }}</span>
-                  {% endif %}
-              </h6>
-            </div>
-            <div class="card-footer">
-              <h6>Теги:
-                  {% for tag in item.tags.all %}
-                      <span class="badge bg-secondary">{{ tag }}</span>
-                  {% endfor %} 
-              </h6>
-            </div>
+      <div class="col-6">
+        <div class="card">
+          <img src="{{ item.photoitem.image.url }}" class="card-img-top" alt="Фото товара отсутствует">
+          <div class="card-header">
+            <p class="card-text">Категория: {{ item.category.name }}</p>
           </div>
-    </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
+            <p class="card-text"><small class="text-muted"></small></p>
+          </div>
+          <div class="card-footer">
+            <h6>Средняя оценка:
+                {% if avg_rate.rate__avg is None%}
+                  <span class="badge bg-secondary">-</span>
+                {% else %}
+                  <span class="badge bg-secondary">{{ avg_rate.rate__avg }}</span>
+                {% endif %}
+                
+            </h6>
+            <h6>Всего оценок:
+                <span class="badge bg-secondary">{{ avg_rate.rate__count}}</span>
+            </h6>
+            <h6>Ваша оценка:
+                {% if user_rate.rate is None %} 
+                    <span class="badge bg-secondary">Этот товар не был оценен вами!</span>
+                {% else %}
+                    <span class="badge bg-secondary">{{ user_rate.get_rate_display }}</span>
+                {% endif %}
+            </h6>
+          </div>
+          <div class="card-footer">
+            <h6>Теги:
+                {% for tag in item.tags.all %}
+                    <span class="badge bg-secondary">{{ tag }}</span>
+                {% endfor %} 
+            </h6>
+          </div>
+        </div>
+      </div>
       <div class="col-6">
         {% if user.is_authenticated %}
         <form method="post">
