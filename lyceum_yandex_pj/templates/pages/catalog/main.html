@@ -5,7 +5,7 @@
 <div class="container">
   {% for item in items %}
     {% ifchanged item.category %}
-        <h1 class="card-header">Категория: {{item.category}}</h1>
+      <h1 class="card-header">Категория: {{item.category}}</h1>
     {% endifchanged %}
     {% include "includes/item.html" %}
     <br>

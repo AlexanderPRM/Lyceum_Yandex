@@ -28,16 +28,16 @@
             </h6>
             <h6>Ваша оценка:
                 {% if user_rate.rate is None %} 
-                    <span class="badge bg-secondary">Этот товар не был оценен вами!</span>
+                  <span class="badge bg-secondary">Этот товар не был оценен вами!</span>
                 {% else %}
-                    <span class="badge bg-secondary">{{ user_rate.get_rate_display }}</span>
+                  <span class="badge bg-secondary">{{ user_rate.get_rate_display }}</span>
                 {% endif %}
             </h6>
           </div>
           <div class="card-footer">
             <h6>Теги:
                 {% for tag in item.tags.all %}
-                    <span class="badge bg-secondary">{{ tag }}</span>
+                  <span class="badge bg-secondary">{{ tag }}</span>
                 {% endfor %} 
             </h6>
           </div>
@@ -46,19 +46,19 @@
       <div class="col-6">
         {% if user.is_authenticated %}
         <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
+          {% csrf_token %}
+          {% for field in form %}
             <div class="form-outline mb-4">
                 {{ field }}
                 {% if field.help_text %}
                     {{ field.help_text }}
                 {% endif %}
             </div>
-            {% endfor %}
+          {% endfor %}
             <input value="Сохранить оценку" type="submit" class="btn btn-secondary mb-2">
         </form>
         {% else %}
-        <h3>Для оценивания товаров небходимо войти</h3>
+          <h3>Для оценивания товаров небходимо войти</h3>
         {% endif %}
       </div>
     </div>
