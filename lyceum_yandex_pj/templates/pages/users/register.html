@@ -4,7 +4,8 @@
 <body> 
   {% block content %}
   {% include 'includes/form_errors.html' %}
-  <form method="post"> {% csrf_token %}
+  <form method="post">
+    {% csrf_token %}
     <div class="container">
       <div class="row">
         <div class="col-md-6 offset-md-3">
