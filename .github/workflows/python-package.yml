@@ -5,7 +5,7 @@ name: Python package
 
 on:
   push:
-    branches: [ "main", "w8" ]
+    branches: [ "main", "w8", "w8-withblackformatting"]
   pull_request:
     branches: [ "main" ]
 
