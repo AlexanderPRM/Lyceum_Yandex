@@ -12,19 +12,16 @@ from users.models import User
 class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
-    login_url = reverse_lazy('users:login')
-    template_name = 'pages/users/profile.html'
+    login_url = reverse_lazy("users:login")
+    template_name = "pages/users/profile.html"
 
     def get_success_url(self) -> str:
-        success_url = reverse_lazy(
-            'users:profile',
-            kwargs={'pk': self.request.user.id}
-            )
+        success_url = reverse_lazy("users:profile", kwargs={"pk": self.request.user.id})
         return success_url
 
     def get(self, request, *args: str, **kwargs):
 
-        if request.user.id == int(kwargs['pk']) or request.user.is_superuser:
+        if request.user.id == int(kwargs["pk"]) or request.user.is_superuser:
             return super().get(request, *args, **kwargs)
         raise Http404
 
@@ -32,19 +29,17 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 class RegisterView(CreateView):
     model = User
     form_class = CustomUserCreationForm
-    template_name = 'pages/users/register.html'
+    template_name = "pages/users/register.html"
 
     def get_success_url(self) -> str:
-        success_url = reverse_lazy(
-            'users:login'
-            )
+        success_url = reverse_lazy("users:login")
         return success_url
 
 
 class UsersList(ListView):
     model = User
-    template_name = 'pages/users/users_list.html'
-    context_object_name = 'users'
+    template_name = "pages/users/users_list.html"
+    context_object_name = "users"
 
     def get_queryset(self):
         return User.objects.filter(is_active=True)
@@ -52,5 +47,5 @@ class UsersList(ListView):
 
 class UserDetail(DetailView):
     model = User
-    template_name = 'pages/users/user_detail.html'
-    context_object_name = 'user'
+    template_name = "pages/users/user_detail.html"
+    context_object_name = "user"

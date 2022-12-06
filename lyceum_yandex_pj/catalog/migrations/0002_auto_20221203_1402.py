@@ -6,23 +6,21 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0001_initial'),
+        ("catalog", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelManagers(
-            name='category',
-            managers=[
-            ],
+            name="category",
+            managers=[],
         ),
         migrations.AlterModelManagers(
-            name='tag',
-            managers=[
-            ],
+            name="tag",
+            managers=[],
         ),
         migrations.RenameField(
-            model_name='item',
-            old_name='tag',
-            new_name='tags',
+            model_name="item",
+            old_name="tag",
+            new_name="tags",
         ),
     ]

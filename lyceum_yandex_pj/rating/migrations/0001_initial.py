@@ -11,20 +11,50 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('catalog', '0003_auto_20221204_1821'),
+        ("catalog", "0003_auto_20221204_1821"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ItemRating',
+            name="ItemRating",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('rate', models.IntegerField(choices=[(1, 'Ненависть'), (2, 'Неприязнь'), (3, 'Нейтрально'), (4, 'Обожание'), (5, 'Любовь')])),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.item')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "rate",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Ненависть"),
+                            (2, "Неприязнь"),
+                            (3, "Нейтрально"),
+                            (4, "Обожание"),
+                            (5, "Любовь"),
+                        ]
+                    ),
+                ),
+                (
+                    "item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="catalog.item"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('item', 'user')},
+                "unique_together": {("item", "user")},
             },
         ),
     ]

@@ -11,27 +11,31 @@ class UserAdmin(BaseUserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
-    list_display = ('id', 'email', 'is_staff', 'is_active', 'date_joined')
-    list_display_links = ('email',)
-    list_filter = ('email', 'is_staff', 'is_active',)
-    search_fields = ('email',)
-    ordering = ('email',)
+    list_display = ("id", "email", "is_staff", "is_active", "date_joined")
+    list_display_links = ("email",)
+    list_filter = (
+        "email",
+        "is_staff",
+        "is_active",
+    )
+    search_fields = ("email",)
+    ordering = ("email",)
     fieldsets = (
-            (None, {'fields': (
-                            'email',
-                            'password',
-                            'first_name',
-                            'last_name',
-                            'birthday')}),
-            ('Permissions', {'fields': ('is_staff', 'is_active')}),
-        )
+        (
+            None,
+            {"fields": ("email", "password", "first_name", "last_name", "birthday")},
+        ),
+        ("Permissions", {"fields": ("is_staff", "is_active")}),
+    )
     add_fieldsets = (
-            (None, {
-                'classes': ('wide',),
-                'fields': (
-                            'email', 'password1', 'password2',
-                            'is_staff', 'is_active')}),
-                        )
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2", "is_staff", "is_active"),
+            },
+        ),
+    )
 
 
 admin.site.unregister(Group)

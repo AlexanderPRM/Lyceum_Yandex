@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0002_auto_20221203_1402'),
+        ("catalog", "0002_auto_20221203_1402"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name': 'категория', 'verbose_name_plural': 'категории'},
+            name="category",
+            options={"verbose_name": "категория", "verbose_name_plural": "категории"},
         ),
         migrations.AlterField(
-            model_name='photositem',
-            name='image',
-            field=models.ImageField(upload_to='', verbose_name='фото'),
+            model_name="photositem",
+            name="image",
+            field=models.ImageField(upload_to="", verbose_name="фото"),
         ),
     ]
