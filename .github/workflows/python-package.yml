@@ -34,7 +34,6 @@ jobs:
       with:
         update-pip: true
         flake8-version: "5.0."
-        plugins: "flake8-quotes"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
