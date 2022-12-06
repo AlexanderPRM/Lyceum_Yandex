@@ -6,22 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('feedback', '0002_alter_feedback_options'),
+        ("feedback", "0002_alter_feedback_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='feedback',
-            options={'verbose_name': 'обратная связь', 'verbose_name_plural': 'обратная связь'},
+            name="feedback",
+            options={
+                "verbose_name": "обратная связь",
+                "verbose_name_plural": "обратная связь",
+            },
         ),
         migrations.AlterField(
-            model_name='feedback',
-            name='mail',
-            field=models.EmailField(max_length=150, verbose_name='почта'),
+            model_name="feedback",
+            name="mail",
+            field=models.EmailField(max_length=150, verbose_name="почта"),
         ),
         migrations.AlterField(
-            model_name='feedback',
-            name='text',
-            field=models.TextField(verbose_name='содержимое'),
+            model_name="feedback",
+            name="text",
+            field=models.TextField(verbose_name="содержимое"),
         ),
     ]

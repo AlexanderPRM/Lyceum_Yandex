@@ -8,10 +8,10 @@ class RateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
+            field.field.widget.attrs["class"] = "form-control"
 
     def save(self, user, item):
-        rating = self.cleaned_data['rate']
+        rating = self.cleaned_data["rate"]
         rate = ItemRating.objects.filter(user=user, item=item)
         if rate:
             rate.update(rate=rating)
@@ -21,7 +21,7 @@ class RateForm(forms.ModelForm):
 
     class Meta:
         model = ItemRating
-        fields = ('rate', )
+        fields = ("rate",)
         help_texts = {
-            'rate': 'выберите оценку',
+            "rate": "выберите оценку",
         }

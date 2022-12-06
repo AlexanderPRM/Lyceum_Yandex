@@ -11,66 +11,51 @@ class PagesURLTest(TestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         cls.category = Category.objects.create(
-            name='Тестовая Категория',
-            slug='test',
-            weight=10
-            )
-        cls.tag = Tag.objects.create(
-            name='Тестовый тег',
-            slug='tag'
-            )
+            name="Тестовая Категория", slug="test", weight=10
+        )
+        cls.tag = Tag.objects.create(name="Тестовый тег", slug="tag")
         cls.item = Item.objects.create(
-            name='Тест',
-            text='превосходно',
-            category=cls.category
-            )
+            name="Тест", text="превосходно", category=cls.category
+        )
         cls.item = Item.objects.create(
-            name='Тест2',
-            text='превосходно 2',
-            category=cls.category
-            )
+            name="Тест2", text="превосходно 2", category=cls.category
+        )
         cls.item = Item.objects.create(
-            name='На главной',
-            text='превосходно',
+            name="На главной",
+            text="превосходно",
             category=cls.category,
-            is_on_main=True
-            )
+            is_on_main=True,
+        )
 
     def test_negative_catalog_detail_pk1(self):
         response = Client().get(
-            reverse(
-                    'catalog:item_detail',
-                    kwargs={'pk': 1}
-                    )
-                )
+            reverse("catalog:item_detail", kwargs={"pk": 1})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_negative_catalog_detail_pk2(self):
         response = Client().get(
-            reverse(
-                    'catalog:item_detail',
-                    kwargs={'pk': 2}
-                    )
-                )
+            reverse("catalog:item_detail", kwargs={"pk": 2})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_catalog_list(self):
-        response = Client().get(reverse('catalog:item_list'))
-        self.assertIsNotNone(response.context['items'])
+        response = Client().get(reverse("catalog:item_list"))
+        self.assertIsNotNone(response.context["items"])
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_main(self):
-        response = Client().get(reverse('homepage:main'))
-        self.assertIsNotNone(response.context['items'])
+        response = Client().get(reverse("homepage:main"))
+        self.assertIsNotNone(response.context["items"])
         self.assertEqual(response.status_code, 200)
 
     def test_negative_catalog_negative_pk(self):
         with self.assertRaises(NoReverseMatch):
-            Client().get(reverse('catalog:item_detail', kwargs={'pk': -200}))
+            Client().get(reverse("catalog:item_detail", kwargs={"pk": -200}))
 
     def test_negative_catalog_zero_pk(self):
         with self.assertRaises(NoReverseMatch):
-            Client().get(reverse('catalog:item_detail', kwargs={'pk': 0}))
+            Client().get(reverse("catalog:item_detail", kwargs={"pk": 0}))
 
 
 class ModelsTest(TestCase):
@@ -78,14 +63,9 @@ class ModelsTest(TestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         cls.category = Category.objects.create(
-            name='Тестовая Категория',
-            slug='test',
-            weight=10
-            )
-        cls.tag = Tag.objects.create(
-            name='Тестовый тег',
-            slug='tag'
-            )
+            name="Тестовая Категория", slug="test", weight=10
+        )
+        cls.tag = Tag.objects.create(name="Тестовый тег", slug="tag")
 
     @classmethod
     def tearDownClass(self) -> None:
@@ -97,10 +77,8 @@ class ModelsTest(TestCase):
         category_count = Category.objects.count()
         with self.assertRaises(ValidationError):
             self.category = Category(
-                name='Тестовая Категория',
-                slug='test-2',
-                weight=-10
-                )
+                name="Тестовая Категория", slug="test-2", weight=-10
+            )
             self.category.full_clean()
             self.category.save()
         self.assertEqual(Category.objects.count(), category_count)
@@ -109,10 +87,8 @@ class ModelsTest(TestCase):
         category_count = Category.objects.count()
         with self.assertRaises(ValidationError):
             self.category = Category(
-                name='Тестовая Категория',
-                slug='test-2',
-                weight=40000
-                )
+                name="Тестовая Категория", slug="test-2", weight=40000
+            )
             self.category.full_clean()
             self.category.save()
         self.assertEqual(Category.objects.count(), category_count)
@@ -121,10 +97,8 @@ class ModelsTest(TestCase):
         category_count = Category.objects.count()
         with self.assertRaises(ValidationError):
             self.category = Category(
-                name='Тестовая Категория',
-                slug='test-2//[]__--',
-                weight=10
-                )
+                name="Тестовая Категория", slug="test-2//[]__--", weight=10
+            )
             self.category.full_clean()
             self.category.save()
         self.assertEqual(Category.objects.count(), category_count)
@@ -132,10 +106,8 @@ class ModelsTest(TestCase):
     def test_category_positive(self):
         category_count = Category.objects.count()
         self.category = Category(
-            name='Тестовая Категория',
-            slug='test-3',
-            weight=10
-            )
+            name="Тестовая Категория", slug="test-3", weight=10
+        )
         self.category.full_clean()
         self.category.save()
         self.assertEqual(Category.objects.count(), category_count + 1)
@@ -143,10 +115,10 @@ class ModelsTest(TestCase):
     def test_item_positive_excellently(self):
         item_count = Item.objects.count()
         self.item = Item(
-            name='Тестовое название',
-            text='превосходно',
+            name="Тестовое название",
+            text="превосходно",
             category=self.category,
-            )
+        )
         self.item.full_clean()
         self.item.save()
         self.item.tags.add(self.tag)
@@ -155,10 +127,10 @@ class ModelsTest(TestCase):
     def test_item_positive_luxurious(self):
         item_count = Item.objects.count()
         self.item = Item(
-            name='Тестовое название',
-            text='роскошно',
+            name="Тестовое название",
+            text="роскошно",
             category=self.category,
-            )
+        )
         self.item.full_clean()
         self.item.save()
         self.item.tags.add(self.tag)
@@ -168,10 +140,10 @@ class ModelsTest(TestCase):
         item_count = Item.objects.count()
         with self.assertRaises(ValidationError):
             self.item = Item(
-                name='Тестовое название',
-                text='Негативное описание',
+                name="Тестовое название",
+                text="Негативное описание",
                 category=self.category,
-                )
+            )
             self.item.full_clean()
             self.item.save()
             self.item.tag.add(self.tag)
@@ -179,10 +151,7 @@ class ModelsTest(TestCase):
 
     def test_tag_positive(self):
         tag_count = Tag.objects.count()
-        self.tag = Tag(
-            name='Тестовый тег',
-            slug='test'
-            )
+        self.tag = Tag(name="Тестовый тег", slug="test")
         self.tag.full_clean()
         self.tag.save()
         self.assertEqual(Tag.objects.count(), tag_count + 1)
@@ -190,10 +159,7 @@ class ModelsTest(TestCase):
     def test_tag_negative(self):
         tag_count = Tag.objects.count()
         with self.assertRaises(ValidationError):
-            self.tag = Tag(
-                name='Тестовый тег',
-                slug='test33/21[]__--'
-                )
+            self.tag = Tag(name="Тестовый тег", slug="test33/21[]__--")
             self.tag.full_clean()
             self.tag.save()
         self.assertEqual(Tag.objects.count(), tag_count)

@@ -11,84 +11,236 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Имя не должно превышать 150 символов', max_length=150, verbose_name='Имя')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('slug', models.SlugField(help_text='Используйте только цифры, буквы латиницы и символы - и _', max_length=200, unique=True, validators=[django.core.validators.RegexValidator(regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$')], verbose_name='слаг')),
-                ('weight', models.SmallIntegerField(default=100, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(32767)], verbose_name='вес')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Имя не должно превышать 150 символов",
+                        max_length=150,
+                        verbose_name="Имя",
+                    ),
+                ),
+                (
+                    "is_published",
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        help_text="Используйте только цифры, буквы латиницы и символы - и _",
+                        max_length=200,
+                        unique=True,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                regex="^[a-z0-9]+(?:[_|-][a-z0-9]+)*$"
+                            )
+                        ],
+                        verbose_name="слаг",
+                    ),
+                ),
+                (
+                    "weight",
+                    models.SmallIntegerField(
+                        default=100,
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(32767),
+                        ],
+                        verbose_name="вес",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Категория',
-                'verbose_name_plural': 'Категории',
+                "verbose_name": "Категория",
+                "verbose_name_plural": "Категории",
             },
             managers=[
-                ('object', django.db.models.manager.Manager()),
+                ("object", django.db.models.manager.Manager()),
             ],
         ),
         migrations.CreateModel(
-            name='Item',
+            name="Item",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Имя не должно превышать 150 символов', max_length=150, verbose_name='Имя')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('is_on_main', models.BooleanField(default=False, verbose_name='на главной')),
-                ('text', models.TextField(validators=[catalog.validators.ContainsOneOfWorldValidator('превосходно', 'роскошно')], verbose_name='описание')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='catalog.category', verbose_name='категория')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Имя не должно превышать 150 символов",
+                        max_length=150,
+                        verbose_name="Имя",
+                    ),
+                ),
+                (
+                    "is_published",
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
+                ),
+                (
+                    "is_on_main",
+                    models.BooleanField(
+                        default=False, verbose_name="на главной"
+                    ),
+                ),
+                (
+                    "text",
+                    models.TextField(
+                        validators=[
+                            catalog.validators.ContainsOneOfWorldValidator(
+                                "превосходно", "роскошно"
+                            )
+                        ],
+                        verbose_name="описание",
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="items",
+                        to="catalog.category",
+                        verbose_name="категория",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'товар',
-                'verbose_name_plural': 'товары',
+                "verbose_name": "товар",
+                "verbose_name_plural": "товары",
             },
         ),
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Имя не должно превышать 150 символов', max_length=150, verbose_name='Имя')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('slug', models.SlugField(help_text='Используйте только цифры, буквы латиницы и символы - и _', max_length=200, unique=True, validators=[django.core.validators.RegexValidator(regex='^[a-z0-9]+(?:[_|-][a-z0-9]+)*$')], verbose_name='слаг')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Имя не должно превышать 150 символов",
+                        max_length=150,
+                        verbose_name="Имя",
+                    ),
+                ),
+                (
+                    "is_published",
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        help_text="Используйте только цифры, буквы латиницы и символы - и _",
+                        max_length=200,
+                        unique=True,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                regex="^[a-z0-9]+(?:[_|-][a-z0-9]+)*$"
+                            )
+                        ],
+                        verbose_name="слаг",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'тег',
-                'verbose_name_plural': 'теги',
+                "verbose_name": "тег",
+                "verbose_name_plural": "теги",
             },
             managers=[
-                ('object', django.db.models.manager.Manager()),
+                ("object", django.db.models.manager.Manager()),
             ],
         ),
         migrations.CreateModel(
-            name='PhotosItem',
+            name="PhotosItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='')),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='photos', to='catalog.item')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(upload_to="")),
+                (
+                    "item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="photos",
+                        to="catalog.item",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'фото товара',
-                'verbose_name_plural': 'фотогалерея товаров',
+                "verbose_name": "фото товара",
+                "verbose_name_plural": "фотогалерея товаров",
             },
         ),
         migrations.CreateModel(
-            name='PhotoItem',
+            name="PhotoItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='', verbose_name='фото')),
-                ('item', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='catalog.item')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(upload_to="", verbose_name="фото"),
+                ),
+                (
+                    "item",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.item",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'превью товара',
+                "verbose_name": "превью товара",
             },
         ),
         migrations.AddField(
-            model_name='item',
-            name='tag',
-            field=models.ManyToManyField(related_name='items', to='catalog.Tag', verbose_name='теги'),
+            model_name="item",
+            name="tag",
+            field=models.ManyToManyField(
+                related_name="items", to="catalog.Tag", verbose_name="теги"
+            ),
         ),
     ]

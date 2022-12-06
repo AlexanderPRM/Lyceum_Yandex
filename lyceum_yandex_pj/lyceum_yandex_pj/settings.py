@@ -12,78 +12,78 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', default='NOT_SO_SECRET')
+SECRET_KEY = os.environ.get("SECRET_KEY", default="NOT_SO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', default='True') == 'True'
+DEBUG = os.environ.get("DEBUG", default="True") == "True"
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INTERNAL_IPS = [
     # ...
-    '127.0.0.1',
+    "127.0.0.1",
     # ...
 ]
 
 INSTALLED_APPS = [
-    'homepage.apps.HomepageConfig',
-    'rating.apps.RatingConfig',
-    'catalog.apps.CatalogConfig',
-    'about.apps.AboutConfig',
-    'feedback.apps.FeedbackConfig',
-    'users.apps.UsersConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'sorl.thumbnail',
-    'django_summernote',
-    'debug_toolbar',
-    'django_cleanup.apps.CleanupConfig',
+    "homepage.apps.HomepageConfig",
+    "rating.apps.RatingConfig",
+    "catalog.apps.CatalogConfig",
+    "about.apps.AboutConfig",
+    "feedback.apps.FeedbackConfig",
+    "users.apps.UsersConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "sorl.thumbnail",
+    "django_summernote",
+    "debug_toolbar",
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-ROOT_URLCONF = 'lyceum_yandex_pj.urls'
+ROOT_URLCONF = "lyceum_yandex_pj.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'lyceum_yandex_pj.context_processor.get_today_birthday_people',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "lyceum_yandex_pj.context_processor.get_today_birthday_people",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'lyceum_yandex_pj.wsgi.application'
+WSGI_APPLICATION = "lyceum_yandex_pj.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -93,20 +93,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation."
+        "UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation."
+        "MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation."
+        "CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation."
+        "NumericPasswordValidator",
     },
 ]
 
@@ -114,9 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = "ru"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -127,31 +127,29 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-AUTH_USER_MODEL = 'users.User'
-AUTH_PROFILE_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
+AUTH_PROFILE_MODEL = "users.User"
 
-STATIC_URL = os.path.join(BASE_DIR, '/static/')
+STATIC_URL = os.path.join(BASE_DIR, "/static/")
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static_dev/')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static_dev'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static_dev"),)
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'send_mails/'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = "send_mails/"
 
-LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
 # LOGOUT_REDIRECT_URL = '/auth/logout/'
 
 
 def sorl_delete(**kwargs):
     print(kwargs)
-    delete(kwargs['file'])
+    delete(kwargs["file"])
 
 
 cleanup_pre_delete.connect(sorl_delete)
