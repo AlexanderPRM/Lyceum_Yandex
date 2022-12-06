@@ -1,14 +1,14 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% load thumbnail %}
 {% load static %}
 {% block content %}
-<div class="container">
-  {% for item in items %}
-    {% ifchanged item.category %}
-      <h1 class="card-header">Категория: {{item.category}}</h1>
-    {% endifchanged %}
-    {% include "includes/item.html" %}
-    <br>
-  {% endfor %}
-</div>
-{% endblock %}
+  <div class="container">
+    {% for item in items %}
+      {% ifchanged item.category %}
+        <h1 class="card-header">Категория: {{ item.category }}</h1>
+      {% endifchanged %}
+      {% include "includes/item.html" %}
+      <br/>
+    {% endfor %}
+  </div>
+{% endblock content %}

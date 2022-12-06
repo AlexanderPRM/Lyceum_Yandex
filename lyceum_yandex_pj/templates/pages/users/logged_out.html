@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="modal modal-alert position-static d-block py-5" tabindex="-1" role="dialog" id="ModalChoice">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow">
-      <div class="modal-body p-4 text-center">
-        <h1 class="mb-0">Выполнен выход.</h1>
-        <br>
-        <p class="mb-0">Вы успешно вышли из аккаунта.</p>
-      </div>
-      <div class="modal-footer flex-nowrap p-0">
-        <a href="{% url 'users:login' %}" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end">
-          <strong>Войти ещё раз</strong>
-        </a>
-        <a href="{% url 'users:register' %}" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0">
-          <strong>Зарегистрироваться</strong>
-        </a>
+  <div class="modal modal-alert position-static d-block py-5"
+       tabindex="-1"
+       role="dialog"
+       id="ModalChoice">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-3 shadow">
+        <div class="modal-body p-4 text-center">
+          <h1 class="mb-0">Выполнен выход.</h1>
+          <br/>
+          <p class="mb-0">Вы успешно вышли из аккаунта.</p>
+        </div>
+        <div class="modal-footer flex-nowrap p-0">
+          <a href="{% url 'users:login' %}"
+             class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end">
+            <strong>Войти ещё раз</strong>
+          </a>
+          <a href="{% url 'users:register' %}"
+             class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0">
+            <strong>Зарегистрироваться</strong>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+{% endblock content %}

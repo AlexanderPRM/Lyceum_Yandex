@@ -1,17 +1,22 @@
-<div class="card border-secondary" style="width: 17rem;">
+<div class="card border-secondary">
   <div class="card-header">
-    <img src="{{ item.photoitem.image.url }}" class="card-img-top" alt=" Фото отсутствует">
+    <img src="{{ item.photoitem.image.url }}"
+         class="card-img-top"
+         alt=" Фото отсутствует"/>
   </div>
   <div class="card-header bg-transparent">
     <p class="card-text">Категория: {{ item.category.name }}</p>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><a href="{% url 'catalog:item_detail' item.id %}">{{ item.name }}</a></h5>
+    <h5 class="card-title">
+      <a href="{% url 'catalog:item_detail' item.id %}">{{ item.name }}</a>
+    </h5>
     <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
   </div>
   <div class="card-footer">
-    <h6>Теги: {% for tag in item.tags.all %}
-      <span class="badge bg-secondary">{{ tag }}</span> {% endfor %}
+    <h6>
+      Теги:
+      {% for tag in item.tags.all %}<span class="badge bg-secondary">{{ tag }}</span>{% endfor %}
     </h6>
   </div>
 </div>

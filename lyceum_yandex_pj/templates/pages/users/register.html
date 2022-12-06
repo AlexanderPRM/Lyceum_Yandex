@@ -1,37 +1,39 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
-<body> 
   {% block content %}
-  {% include 'includes/form_errors.html' %}
-  <form method="post">
-    {% csrf_token %}
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h2 class="text-center text-dark mt-5">Регистрация аккаунта</h2>
-          <div class="card my-5">
-            <form class="card-body cardbody-color p-lg-5">
-              <div class="text-center">
-                <img src="{% static 'img\favicon\android-chrome-512x512.png' %}" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px" alt="profile">
-              </div>
-              <div class="container-sm align-items-center">
-                {% for field in form %}
-                  <div class="form-outline mb-4"> {{ field }}
-                    <label class="form-label">{{ field.label_tag }}</label>
+    {% include "includes/form_errors.html" %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h2 class="text-center text-dark mt-5">Регистрация аккаунта</h2>
+            <div class="card my-5">
+              <form class="card-body cardbody-color p-lg-5">
+                <div class="text-center">
+                    <img src="{% static "img\favicon\android-chrome-512x512.png" %}"
+                          class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                          width="200px"
+                          alt="profile"/>
                   </div>
-                {% endfor %}
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-secondary btn-block btn-lg gradient-custom-4 text-body">Создать аккаунт</button>
-              </div>
-              <br>
+                  <div class="container-sm align-items-center">
+                    {% for field in form %}
+                      <div class="form-outline mb-4">
+                        {{ field }}
+                        <label class="form-label">{{ field.label_tag }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="text-center">
+                    <button type="submit"
+                            class="btn btn-secondary btn-block btn-lg gradient-custom-4 text-body">Создать аккаунт</button>
+                  </div>
+                  <br/>
+              </form>
+            </div>
           </div>
-          </form>
         </div>
       </div>
-    </div>
-    </div>
-  </form>
-  {% endblock %}
-</body>
+    </form>
+{% endblock content %}

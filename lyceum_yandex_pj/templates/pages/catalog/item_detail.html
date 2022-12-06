@@ -1,67 +1,70 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<div class=" py-3">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <div class="card">
-          <img src="{{ item.photoitem.image.url }}" class="card-img-top" alt="Фото товара отсутствует">
-          <div class="card-header">
-            <p class="card-text">Категория: {{ item.category.name }}</p>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
-            <p class="card-text"><small class="text-muted"></small></p>
-          </div>
-          <div class="card-footer">
-            <h6>Средняя оценка:
-                {% if avg_rate.rate__avg is None%}
+  <div class=" py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <img src="{{ item.photoitem.image.url }}"
+                 class="card-img-top"
+                 alt="Фото товара отсутствует"/>
+            <div class="card-header">
+              <p class="card-text">Категория: {{ item.category.name }}</p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
+              <p class="card-text">
+                <small class="text-muted"></small>
+              </p>
+            </div>
+            <div class="card-footer">
+              <h6>
+                Средняя оценка:
+                {% if avg_rate.rate__avg is None %}
                   <span class="badge bg-secondary">-</span>
                 {% else %}
                   <span class="badge bg-secondary">{{ avg_rate.rate__avg }}</span>
                 {% endif %}
-                
-            </h6>
-            <h6>Всего оценок:
-                <span class="badge bg-secondary">{{ avg_rate.rate__count}}</span>
-            </h6>
-            <h6>Ваша оценка:
-                {% if user_rate.rate is None %} 
+              </h6>
+              <h6>
+                Всего оценок:
+                <span class="badge bg-secondary">{{ avg_rate.rate__count }}</span>
+              </h6>
+              <h6>
+                Ваша оценка:
+                {% if user_rate.rate is None %}
                   <span class="badge bg-secondary">Этот товар не был оценен вами!</span>
                 {% else %}
                   <span class="badge bg-secondary">{{ user_rate.get_rate_display }}</span>
                 {% endif %}
-            </h6>
-          </div>
-          <div class="card-footer">
-            <h6>Теги:
-                {% for tag in item.tags.all %}
-                  <span class="badge bg-secondary">{{ tag }}</span>
-                {% endfor %} 
-            </h6>
+              </h6>
+            </div>
+            <div class="card-footer">
+              <h6>
+                Теги:
+                {% for tag in item.tags.all %}<span class="badge bg-secondary">{{ tag }}</span>{% endfor %}
+              </h6>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6">
-        {% if user.is_authenticated %}
-        <form method="post">
-          {% csrf_token %}
-          {% for field in form %}
-            <div class="form-outline mb-4">
-                {{ field }}
-                {% if field.help_text %}
-                  {{ field.help_text }}
-                {% endif %}
-            </div>
-          {% endfor %}
-            <input value="Сохранить оценку" type="submit" class="btn btn-secondary mb-2">
-        </form>
-        {% else %}
-          <h3>Для оценивания товаров небходимо войти</h3>
-        {% endif %}
+        <div class="col-6">
+          {% if user.is_authenticated %}
+            <form method="post">
+              {% csrf_token %}
+              {% for field in form %}
+                <div class="form-outline mb-4">
+                  {{ field }}
+                  {% if field.help_text %}{{ field.help_text }}{% endif %}
+                </div>
+              {% endfor %}
+              <input value="Сохранить оценку" type="submit" class="btn btn-secondary mb-2"/>
+            </form>
+          {% else %}
+            <h3>Для оценивания товаров небходимо войти</h3>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+{% endblock content %}
