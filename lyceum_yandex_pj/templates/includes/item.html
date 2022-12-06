@@ -16,7 +16,9 @@
   <div class="card-footer">
     <h6>
       Теги:
-      {% for tag in item.tags.all %}<span class="badge bg-secondary">{{ tag }}</span>{% endfor %}
+      {% for tag in item.tags.all %}
+        <label class="badge bg-secondary">{{ tag }}</label> 
+      {% endfor %}
     </h6>
   </div>
 </div>
