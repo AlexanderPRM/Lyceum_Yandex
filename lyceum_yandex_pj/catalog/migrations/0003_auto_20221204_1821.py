@@ -12,7 +12,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="category",
-            options={"verbose_name": "категория", "verbose_name_plural": "категории"},
+            options={
+                "verbose_name": "категория",
+                "verbose_name_plural": "категории",
+            },
         ),
         migrations.AlterField(
             model_name="photositem",

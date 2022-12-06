@@ -85,5 +85,9 @@ class CustomPasswordResetForm(PasswordResetForm):
 class CustomPasswordResetConfirmForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(CustomPasswordResetConfirmForm, self).__init__(*args, **kwargs)
-        self.fields["new_password1"].widget.attrs.update({"class": "form-control"})
-        self.fields["new_password2"].widget.attrs.update({"class": "form-control"})
+        self.fields["new_password1"].widget.attrs.update(
+            {"class": "form-control"}
+        )
+        self.fields["new_password2"].widget.attrs.update(
+            {"class": "form-control"}
+        )

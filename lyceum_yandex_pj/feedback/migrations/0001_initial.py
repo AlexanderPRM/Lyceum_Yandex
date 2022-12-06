@@ -23,7 +23,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("text", models.TextField(verbose_name="Содержимое")),
-                ("mail", models.EmailField(max_length=150, verbose_name="Почта")),
+                (
+                    "mail",
+                    models.EmailField(max_length=150, verbose_name="Почта"),
+                ),
                 ("created_on", models.DateTimeField(auto_now_add=True)),
             ],
         ),

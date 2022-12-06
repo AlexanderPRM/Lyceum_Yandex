@@ -45,14 +45,21 @@ class Migration(migrations.Migration):
                         max_length=254, unique=True, verbose_name="почта"
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="пароль")),
+                (
+                    "password",
+                    models.CharField(max_length=128, verbose_name="пароль"),
+                ),
                 (
                     "first_name",
-                    models.CharField(blank=True, max_length=30, verbose_name="имя"),
+                    models.CharField(
+                        blank=True, max_length=30, verbose_name="имя"
+                    ),
                 ),
                 (
                     "last_name",
-                    models.CharField(blank=True, max_length=30, verbose_name="фамилия"),
+                    models.CharField(
+                        blank=True, max_length=30, verbose_name="фамилия"
+                    ),
                 ),
                 (
                     "date_joined",
@@ -66,9 +73,14 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_staff",
-                    models.BooleanField(default=False, verbose_name="персонал"),
+                    models.BooleanField(
+                        default=False, verbose_name="персонал"
+                    ),
                 ),
-                ("birthday", models.DateField(null=True, verbose_name="день рождения")),
+                (
+                    "birthday",
+                    models.DateField(null=True, verbose_name="день рождения"),
+                ),
                 (
                     "groups",
                     models.ManyToManyField(

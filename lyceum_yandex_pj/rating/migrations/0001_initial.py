@@ -42,7 +42,8 @@ class Migration(migrations.Migration):
                 (
                     "item",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="catalog.item"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.item",
                     ),
                 ),
                 (

@@ -29,12 +29,16 @@ class FeedbackTests(TestCase):
 
     def test_help_text_text(self):
         mail_name = FeedbackTests.form.fields["text"].help_text
-        self.assertEqual(mail_name, "В этом поле введите текст своего обращения.")
+        self.assertEqual(
+            mail_name, "В этом поле введите текст своего обращения."
+        )
 
     def test_redirect(self):
         items_count = FeedBack.objects.count()
 
         post = {"text": "Test text", "mail": "test@yandex.ru"}
-        response = Client().post(reverse("feedback:feedback"), data=post, follow=True)
+        response = Client().post(
+            reverse("feedback:feedback"), data=post, follow=True
+        )
         self.assertRedirects(response, reverse("feedback:feedback"))
         self.assertEqual(items_count + 1, FeedBack.objects.count())

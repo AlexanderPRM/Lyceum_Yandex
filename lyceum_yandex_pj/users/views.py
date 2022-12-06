@@ -16,7 +16,9 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     template_name = "pages/users/profile.html"
 
     def get_success_url(self) -> str:
-        success_url = reverse_lazy("users:profile", kwargs={"pk": self.request.user.id})
+        success_url = reverse_lazy(
+            "users:profile", kwargs={"pk": self.request.user.id}
+        )
         return success_url
 
     def get(self, request, *args: str, **kwargs):

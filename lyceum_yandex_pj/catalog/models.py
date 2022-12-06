@@ -89,7 +89,9 @@ class Item(BaseCatalog):
         related_name="items",
         verbose_name="категория",
     )
-    tags = models.ManyToManyField(Tag, related_name="items", verbose_name="теги")
+    tags = models.ManyToManyField(
+        Tag, related_name="items", verbose_name="теги"
+    )
 
     objects = ItemManager()
 
@@ -114,7 +116,9 @@ class PhotoItem(models.Model):
 
 class PhotosItem(models.Model):
     image = models.ImageField(verbose_name="фото")
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name="photos")
+    item = models.ForeignKey(
+        Item, on_delete=models.CASCADE, related_name="photos"
+    )
 
     def __str__(self):
         return self.image.url

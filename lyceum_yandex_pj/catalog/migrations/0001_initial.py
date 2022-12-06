@@ -36,7 +36,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_published",
-                    models.BooleanField(default=True, verbose_name="Опубликовано"),
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
                 ),
                 (
                     "slug",
@@ -94,11 +96,15 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_published",
-                    models.BooleanField(default=True, verbose_name="Опубликовано"),
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
                 ),
                 (
                     "is_on_main",
-                    models.BooleanField(default=False, verbose_name="на главной"),
+                    models.BooleanField(
+                        default=False, verbose_name="на главной"
+                    ),
                 ),
                 (
                     "text",
@@ -148,7 +154,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_published",
-                    models.BooleanField(default=True, verbose_name="Опубликовано"),
+                    models.BooleanField(
+                        default=True, verbose_name="Опубликовано"
+                    ),
                 ),
                 (
                     "slug",
@@ -212,11 +220,15 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("image", models.ImageField(upload_to="", verbose_name="фото")),
+                (
+                    "image",
+                    models.ImageField(upload_to="", verbose_name="фото"),
+                ),
                 (
                     "item",
                     models.OneToOneField(
-                        on_delete=django.db.models.deletion.CASCADE, to="catalog.item"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.item",
                     ),
                 ),
             ],

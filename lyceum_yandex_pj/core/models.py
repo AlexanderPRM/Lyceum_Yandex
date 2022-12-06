@@ -8,7 +8,9 @@ class BaseCatalog(models.Model):
         help_text="Имя не должно превышать 150 символов",
         verbose_name="Имя",
     )
-    is_published = models.BooleanField(verbose_name="Опубликовано", default=True)
+    is_published = models.BooleanField(
+        verbose_name="Опубликовано", default=True
+    )
 
     class Meta:
         abstract = True
@@ -19,7 +21,8 @@ class SlugMixin(models.Model):
         max_length=200,
         unique=True,
         verbose_name="слаг",
-        help_text="Используйте только цифры, " "буквы латиницы и символы - и _",
+        help_text="Используйте только цифры, "
+        "буквы латиницы и символы - и _",
         validators=[
             RegexValidator(
                 regex="^[a-z0-9]+(?:[_|-][a-z0-9]+)*$",

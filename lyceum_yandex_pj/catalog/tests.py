@@ -28,11 +28,15 @@ class PagesURLTest(TestCase):
         )
 
     def test_negative_catalog_detail_pk1(self):
-        response = Client().get(reverse("catalog:item_detail", kwargs={"pk": 1}))
+        response = Client().get(
+            reverse("catalog:item_detail", kwargs={"pk": 1})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_negative_catalog_detail_pk2(self):
-        response = Client().get(reverse("catalog:item_detail", kwargs={"pk": 2}))
+        response = Client().get(
+            reverse("catalog:item_detail", kwargs={"pk": 2})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_catalog_list(self):
@@ -101,7 +105,9 @@ class ModelsTest(TestCase):
 
     def test_category_positive(self):
         category_count = Category.objects.count()
-        self.category = Category(name="Тестовая Категория", slug="test-3", weight=10)
+        self.category = Category(
+            name="Тестовая Категория", slug="test-3", weight=10
+        )
         self.category.full_clean()
         self.category.save()
         self.assertEqual(Category.objects.count(), category_count + 1)

@@ -23,7 +23,15 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (
             None,
-            {"fields": ("email", "password", "first_name", "last_name", "birthday")},
+            {
+                "fields": (
+                    "email",
+                    "password",
+                    "first_name",
+                    "last_name",
+                    "birthday",
+                )
+            },
         ),
         ("Permissions", {"fields": ("is_staff", "is_active")}),
     )
@@ -32,7 +40,13 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "password1", "password2", "is_staff", "is_active"),
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                    "is_staff",
+                    "is_active",
+                ),
             },
         ),
     )

@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="user",
             name="birthday",
-            field=models.DateField(blank=True, null=True, verbose_name="день рождения"),
+            field=models.DateField(
+                blank=True, null=True, verbose_name="день рождения"
+            ),
         ),
     ]
