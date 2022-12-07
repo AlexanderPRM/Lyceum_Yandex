@@ -29,6 +29,8 @@
     <title>Магазин</title>
   </head>
   <body class="d-flex flex-column min-vh-100">
+    {% load tz_detect %}
+    {% tz_detect %}
     {% include "includes/header.html" %}
     {% include "includes/birthday.html" %}
     {% block content %}

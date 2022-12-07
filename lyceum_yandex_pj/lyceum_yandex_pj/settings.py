@@ -1,4 +1,5 @@
 import os
+
 from django_cleanup.signals import cleanup_pre_delete
 from dotenv import load_dotenv
 from pathlib import Path
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django_summernote",
     "debug_toolbar",
     "django_cleanup.apps.CleanupConfig",
+    "tz_detect",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "tz_detect.middleware.TimezoneMiddleware",
 ]
 
 ROOT_URLCONF = "lyceum_yandex_pj.urls"

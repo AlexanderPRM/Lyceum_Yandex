@@ -23,3 +23,7 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include("debug_toolbar.urls")),
     ]
+
+urlpatterns += [
+    path('tz_detect/', include('tz_detect.urls')),
+]
