@@ -33,6 +33,12 @@ class ContextProcessorTest(TestCase):
             birthday=now(),
             first_name="Андрей",
         )
+        User.objects.create(
+            email="mail3@mail.com",
+            password="12344dre",
+            birthday=datetime(2022, 4, 5, 14, 40, 59),
+            first_name="Не Андрей",
+        )
         cls.user_email = user.email
         cls.user_first_name = user.first_name
 

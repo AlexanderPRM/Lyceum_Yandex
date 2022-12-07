@@ -1,20 +1,23 @@
 <div class="container">
   <p>Текущее время: {{ time }}</p>
-  <h2>Пользователи нашего сайта, у кого сегодня день рождения!</h2>
-  <table class="table table-sm">
-    <thead>
-      <tr>
-        <th scope="col">Почта</th>
-        <th scope="col">Имя</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in birthdays %}
+  {% if birthdays %}
+    <h2>Пользователи нашего сайта, у кого сегодня день рождения!</h2>
+    <table class="table table-sm">
+      <thead>
         <tr>
-          <td>{{ user.email }}</td>
-          <td>{{ user.first_name }}</td>
+          <th scope="col">Почта</th>
+          <th scope="col">Имя</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      
+        {% for user in birthdays %}
+          <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.first_name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 </div>
