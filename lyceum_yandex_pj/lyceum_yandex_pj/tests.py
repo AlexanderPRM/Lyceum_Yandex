@@ -49,7 +49,9 @@ class ContextProcessorTest(TestCase):
     @parameterized.expand(URLS_LIST)
     def test_user_in_birthdays_table(self, mock, reverse_url):
         response = Client().get(reverse(reverse_url))
-        self.assertEqual(self.user_email, response.context["birthdays"][0]["email"])
+        self.assertEqual(
+            self.user_email, response.context["birthdays"][0]["email"]
+        )
         self.assertEqual(
             self.user_first_name,
             response.context["birthdays"][0]["first_name"],
