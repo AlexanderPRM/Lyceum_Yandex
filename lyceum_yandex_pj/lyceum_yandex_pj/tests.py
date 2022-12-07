@@ -18,11 +18,13 @@ URLS_LIST = [
     ("users:register"),
 ]
 
+FAKE_NOW_TIME = datetime(2022, 1, 1, 14, 40, 59)
 
-@patch('lyceum_yandex_pj.context_processor.now', return_value=datetime(2022, 1, 1, 14, 40, 59))
+
+@patch("lyceum_yandex_pj.context_processor.now", return_value=FAKE_NOW_TIME)
 class ContextProcessorTest(TestCase):
     @classmethod
-    @patch('lyceum_yandex_pj.tests.now', return_value=datetime(2022, 1, 1, 14, 40, 59))
+    @patch("lyceum_yandex_pj.tests.now", return_value=FAKE_NOW_TIME)
     def setUpTestData(cls, mock):
         super(ContextProcessorTest, cls).setUpTestData()
         user = User.objects.create(
@@ -47,9 +49,7 @@ class ContextProcessorTest(TestCase):
     @parameterized.expand(URLS_LIST)
     def test_user_in_birthdays_table(self, mock, reverse_url):
         response = Client().get(reverse(reverse_url))
-        self.assertEqual(
-            self.user_email, response.context["birthdays"][0]["email"]
-        )
+        self.assertEqual(self.user_email, response.context["birthdays"][0]["email"])
         self.assertEqual(
             self.user_first_name,
             response.context["birthdays"][0]["first_name"],
