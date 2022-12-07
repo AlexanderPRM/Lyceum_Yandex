@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.urls.exceptions import NoReverseMatch
