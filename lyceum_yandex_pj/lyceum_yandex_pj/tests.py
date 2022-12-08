@@ -48,6 +48,11 @@ class ContextProcessorTest(TestCase):
         self.assertIn("birthdays", response.context)
 
     @parameterized.expand(URLS_LIST)
+    def test_email_in(self, mock, reverse_url):
+        response = Client().get(reverse(reverse_url))
+        self.assertIn("email", response.context["birthdays"][0])
+
+    @parameterized.expand(URLS_LIST)
     def test_birthday_length(self, mock, reverse_url):
         response = Client().get(reverse(reverse_url))
         self.assertEqual(1, len(response.context["birthdays"]))
